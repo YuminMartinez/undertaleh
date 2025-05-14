@@ -1,3 +1,6 @@
+import gifAnimation.*;
+Gif miGif;
+
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
 
@@ -9,6 +12,7 @@ void setup(){
 
 void draw() {
   background(0);
+
   
   switch(gameState) {
     case FIRST_STAGE:
