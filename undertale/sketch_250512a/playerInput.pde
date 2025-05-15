@@ -10,4 +10,7 @@ void keyPressed() {
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  
+  
+ 
 }

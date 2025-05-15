@@ -1,6 +1,6 @@
 // Variables globales para la transición
 float transitionX = 0;
-
+PImage img;
 void secondStageTransition() {
   // Dibujar firstStage primero como fondo
   firstStage(); 
@@ -18,4 +18,12 @@ void secondStageTransition() {
     
      gameState = GameState.SECOND_STAGE;
   }
+}
+
+
+void secondStage()
+{
+  img = loadImage("daruma.png");
+  image(img, width/2,height/2); // Dibuja la imagen en las coordenadas (0, 0
+  
 }

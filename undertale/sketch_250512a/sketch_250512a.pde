@@ -1,5 +1,5 @@
-import gifAnimation.*;
-Gif miGif;
+//import gifAnimation.*;
+//Gif miGif;
 
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
@@ -24,6 +24,7 @@ void draw() {
     break;
     
     case SECOND_STAGE:
+    secondStage();
     break;
       
  
