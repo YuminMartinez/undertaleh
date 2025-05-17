@@ -27,6 +27,7 @@ boolean actionSelected = false;
 boolean atackMode = false;
 int PJLife = 99;
 int PJMaxLife = 99;
+int barraAtaque;
 void secondStage()
 { 
   if(actionSelected == false)
@@ -102,11 +103,40 @@ void PJAttack()
   textSize(48);
   text("*Insertar Nombre enemigo*", width/2.8f, height/1.5f);
 }
+void PrintBarraAtaque()
+{
+  // Ataque flojo
+  fill(255,0,0);
+  stroke(255);
+  strokeWeight(5);
+  float pXrojo = width/6;
+  float disRojo = width/1.5f;
+  rect(pXrojo,height/1.8f,disRojo, height/5);
+  // Ataque medio
+  fill(255,255,0);
+  strokeWeight(0);
+  rect(pXrojo+disRojo*0.3f,height/1.8f,disRojo*0.4f, height/5);
+  // Ataque fuerte
+   fill(0,255,0);
+  strokeWeight(0);
+  rect(pXrojo+disRojo*0.45f,height/1.8f,disRojo*0.1f, height/5);
+  //width*0.4f
+  fill(255);
+   stroke(0);
+  strokeWeight(7);
+  rect(barraAtaque,height/1.8f,20, height/5);
+  barraAtaque+= 30;
+  if(barraAtaque >=width*0.84f)
+  {
+    atackMode = false;
+    MenuBattle = true;
+    barraAtaque = width/6;
+  }
+  
+}
+
 int CalculateDmg()
 {
-  fill(255,0,0);
-  strokeWeight(0);
-  rect(width/6,height/1.8f,width/3.5f, height/20);
-  println("Alvaricoque");
+  
   return 0;
 }

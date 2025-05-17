@@ -1,6 +1,5 @@
 //import gifAnimation.*;
 //Gif miGif;
-
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
 
@@ -8,6 +7,7 @@ void setup(){
   size(1920, 1080); 
   frameRate(30);
   background(0); 
+  barraAtaque = width/6;
 }
 
 void draw() 
@@ -43,7 +43,7 @@ void draw()
     }
     if(atackMode && !actionSelected)
     {
-      CalculateDmg();
+      PrintBarraAtaque();
     }
     break;
       
