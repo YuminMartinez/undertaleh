@@ -21,6 +21,20 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  
+   if(actionSelected == true )
+    {
+      if(keyCode == SHIFT)
+      {
+        actionSelected = false;
+        MenuBattle = true;
+      }
+      if(keyCode == ENTER)
+       {
+         actionSelected = false;
+         atackMode = true;
+       }
+    }
     if(MenuBattle == true)
     {
        if (keyCode == LEFT) 
@@ -47,16 +61,8 @@ void keyPressed()
          }
        }
     }
-    if(actionSelected == true)
-    {
-      if(keyCode == SHIFT)
-      {
-        actionSelected = false;
-        MenuBattle = true;
-      }
-      
-    }
-  
+   
+ 
   
  
 }

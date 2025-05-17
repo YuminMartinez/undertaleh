@@ -24,6 +24,7 @@ void secondStageTransition() {
 int player_choose = 0;
 boolean MenuBattle = false;
 boolean actionSelected = false;
+boolean atackMode = false;
 int PJLife = 99;
 int PJMaxLife = 99;
 void secondStage()
@@ -100,4 +101,12 @@ void PJAttack()
   fill(255);
   textSize(48);
   text("*Insertar Nombre enemigo*", width/2.8f, height/1.5f);
+}
+int CalculateDmg()
+{
+  fill(255,0,0);
+  strokeWeight(0);
+  rect(width/6,height/1.8f,width/3.5f, height/20);
+  println("Alvaricoque");
+  return 0;
 }

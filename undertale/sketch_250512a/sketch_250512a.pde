@@ -14,7 +14,7 @@ void draw()
 {
   frameRate(30);
   background(0);
-
+  
 // si llamamos a esta funcion durante el combate, podemos hacer que el jugador se mueva por la batalla si mantenemos presionada la tecla  keyPressed();
   switch(gameState) {
     case FIRST_STAGE:
@@ -26,6 +26,7 @@ void draw()
     break;
     
     case SECOND_STAGE:
+    PrintEnemy();
     secondStage();
     if(actionSelected)
     {
@@ -35,11 +36,14 @@ void draw()
           PJAttack();
           break;
        case 1:
-       
        case 2:
        case 3:
        
       }
+    }
+    if(atackMode && !actionSelected)
+    {
+      CalculateDmg();
     }
     break;
       
@@ -53,4 +57,9 @@ void draw()
  {
    PJLife = 0;
  }
+}
+
+void EnemySelected()
+{
+  
 }
