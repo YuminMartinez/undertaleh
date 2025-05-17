@@ -28,6 +28,16 @@ void keyPressed()
             { player_choose = 3;
             }
        }
+       if(keyCode == ENTER)
+       {
+         switch(player_choose)
+         {
+          case 0:
+            MenuBattle = false;
+            Attack = true;
+            break;
+         }
+       }
     }
   
   

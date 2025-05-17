@@ -25,6 +25,10 @@ void draw() {
     
     case SECOND_STAGE:
     secondStage();
+    if(Attack)
+    {
+      PJAttack();
+    }
     break;
       
  

@@ -22,6 +22,7 @@ void secondStageTransition() {
 
 int player_choose = 0;
 boolean MenuBattle = false;
+boolean Attack = false;
 void secondStage()
 { 
    MenuBattle = true;
@@ -72,4 +73,17 @@ void secondStage()
  // image(img, width/2,height/2); // Dibuja la imagen en las coordenadas (0, 0
   
   
+}
+void PJAttack()
+{
+  noFill();
+  stroke(255);
+  strokeWeight(5);
+  rect(width/6, height/1.8f,2*width/3, height/5);
+  img = loadImage("daruma.png");
+  image(img, width/3,height/1.25f,90,80);
+  /*fill(255);
+  textSize(80);
+  textAlign(CENTER, CENTER);
+  text("MONEDERO", 800, 400);*/
 }
