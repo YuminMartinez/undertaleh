@@ -18,42 +18,46 @@ void secondStageTransition() {
     
      gameState = GameState.SECOND_STAGE;
   }
+  MenuBattle = true;
 }
 
 int player_choose = 0;
 boolean MenuBattle = false;
-boolean Attack = false;
+boolean actionSelected = false;
+int PJLife = 99;
+int PJMaxLife = 99;
 void secondStage()
 { 
-   MenuBattle = true;
- 
+  if(actionSelected == false)
+  {
     switch(player_choose)
     {
       case 0:
         fill(255,165,0);
         rect(width/6,height/1.25f,width/8, height/16);
         img = loadImage("daruma.png");
-        image(img, width/6,height/1.25f,90,80);
+        image(img, width/6,height/1.25f,width/21.33f,height/13.5f);
         break;
       case 1:
         fill(255,165,0);
         rect(width/3,height/1.25f,width/8, height/16);
         img = loadImage("daruma.png");
-        image(img, width/3,height/1.25f,90,80);
+        image(img, width/3,height/1.25f,width/21.33f,height/13.5f);
         break;
       case 2:
         fill(255,165,0);
         rect(width/2,height/1.25f,width/8, height/16);
         img = loadImage("daruma.png");
-        image(img, width/2,height/1.25f,90,80);
+        image(img, width/2,height/1.25f,width/21.33f,height/13.5f);
         break;
       case 3:
         fill(255,165,0);
         rect(width-width/3,height/1.25f,width/8, height/16);
         img = loadImage("daruma.png");
-        image(img, width-width/3,height/1.25f,90,80);
+        image(img, width-width/3,height/1.25f,width/21.33f,height/13.5f);
         break;
     }
+  }
     
     //rect(mouseX, mouseY, ancho_muro, alto_muro);
   
@@ -65,14 +69,25 @@ void secondStage()
   drawRectWithText(width/2,height/1.25f,width/8, height/16, "Item", 48);
    // Boton 4 
   drawRectWithText(width-width/3,height/1.25f,width/8, height/16, "Mercy", 48);
-  
-  // Draw text zone to get info about the battle
-  
-   drawRectWithText(width-width/3,height/1.25f,width/8, height/16, "Mercy", 48);
- // img = loadImage("daruma.png");
- // image(img, width/2,height/2); // Dibuja la imagen en las coordenadas (0, 0
-  
-  
+  // Barra de vida roja que indica la máxima capacidad
+  fill(255,0,0);
+  strokeWeight(0);
+  rect(width/3.5f,height/1.13f,width/3.5f, height/20);
+  // Barra de vida verde que indica la vida que le queda al player
+  fill(0,255,0);
+  strokeWeight(0);
+  rect(width/3.5f,height/1.13f,PJLife*(width/3.5f)/PJMaxLife, height/20);
+  textSize(48);
+  fill(255);
+  String HPrestante = " HP: " + PJLife;
+  text(HPrestante,width/1.6f,height/1.1f);
+  /*textSize(32);
+  fill(100, 0, 0);
+  String vidasRestantes = "Vidas totales: " + vidas;
+  text(vidasRestantes, 50, 35);
+  String Score = "Puntuacion: " + puntuacion;
+  textSize(32);
+  text(Score, width - 250, 35);*/
 }
 void PJAttack()
 {
@@ -81,9 +96,8 @@ void PJAttack()
   strokeWeight(5);
   rect(width/6, height/1.8f,2*width/3, height/5);
   img = loadImage("daruma.png");
-  image(img, width/3,height/1.25f,90,80);
-  /*fill(255);
-  textSize(80);
-  textAlign(CENTER, CENTER);
-  text("MONEDERO", 800, 400);*/
+  image(img, width/6, height/1.6f,width/21.33f,height/13.5f);
+  fill(255);
+  textSize(48);
+  text("*Insertar Nombre enemigo*", width/2.8f, height/1.5f);
 }

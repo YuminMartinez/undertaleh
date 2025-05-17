@@ -5,6 +5,14 @@ boolean showSecondStage = false;
 
 void keyPressed() 
 {
+  if(keyCode == 'Q')
+  {
+    PJLife--;
+  }
+  if(keyCode == 'E')
+  {
+    PJLife++;
+  }
   if (key == ' ' || keyCode == 32) 
   {  // Si se presiona la barra espaciadora
     if (gameState == GameState.FIRST_STAGE) 
@@ -13,7 +21,7 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
-    if(MenuBattle)
+    if(MenuBattle == true)
     {
        if (keyCode == LEFT) 
        {  // Si se presiona la tecla izquierda
@@ -34,10 +42,19 @@ void keyPressed()
          {
           case 0:
             MenuBattle = false;
-            Attack = true;
+            actionSelected = true;
             break;
          }
        }
+    }
+    if(actionSelected == true)
+    {
+      if(keyCode == SHIFT)
+      {
+        actionSelected = false;
+        MenuBattle = true;
+      }
+      
     }
   
   
