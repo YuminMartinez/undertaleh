@@ -60,6 +60,22 @@ void keyPressed()
             break;
          }
        }
+       
+         if(moveAttackOne) {
+        if (key == 'w' || key == 'W') {
+            daruma.move(0, -1); // Arriba
+        }  
+        if (key == 's' || key == 'S') {
+            daruma.move(0, 1); // Abajo
+        }
+        if (key == 'a' || key == 'A') {
+            daruma.move(-1, 0); // Izquierda
+        }
+        if (key == 'd' || key == 'D') {
+            daruma.move(1, 0); // Derecha
+        }
+    }
+       //ultimo corchete
     }
    
  

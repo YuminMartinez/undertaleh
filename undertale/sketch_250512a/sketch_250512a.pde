@@ -3,6 +3,7 @@
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
 
+
 void setup(){
   size(1920, 1080); 
   frameRate(30);
@@ -43,7 +44,8 @@ void draw()
     }
     if(atackMode && !actionSelected)
     {
-      PrintBarraAtaque();
+     // PrintBarraAtaque();
+      attackone();
     }
     break;
       
