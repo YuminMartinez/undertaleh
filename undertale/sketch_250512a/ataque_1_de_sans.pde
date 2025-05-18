@@ -55,6 +55,7 @@ void katanas_iniciar() {
 
   curvaKatana2 = new curva(p2, color(0, 255, 255));
   curvaKatana2.calcular_coefs();
+   inicializarBolas(); 
 }
 
 
@@ -65,8 +66,7 @@ void katanas_iniciar() {
 
 // BOLAS DE RECOLECTA
 Bolas[] bolas = new Bolas[4];
-PVector posicionA = new PVector(300, 400);
-PVector posicionB = new PVector(800, 300);
+PVector posicionA, posicionB; // Solo declaramos los objetos, sin inicializar aún
 int bolaActual = 0;
 boolean juegoActivo = true; // Controla si el sistema de bolas está activo
 
@@ -108,16 +108,18 @@ class Bolas extends Position {
 
 
 void inicializarBolas() {
-  
+  int offsetVertical = -30;
+    posicionA = new PVector(curvaKatana.puntos_de_ctrl[0].x, curvaKatana.puntos_de_ctrl[0].y + offsetVertical);
+  posicionB = new PVector(curvaKatana.puntos_de_ctrl[3].x, curvaKatana.puntos_de_ctrl[3].y + offsetVertical);
 
   // Inicializar las 4 bolas (todas invisibles al inicio)
   // Bolas 1 y 3 en posición A
-  bolas[0] = new Bolas(posicionA.x, posicionA.y, 50, color(255, 0, 0)); 
-  bolas[2] = new Bolas(posicionA.x, posicionA.y, 50, color(0, 255, 0));
+  bolas[0] = new Bolas(posicionA.x, posicionA.y, 10, color(255, 0, 0)); 
+  bolas[2] = new Bolas(posicionA.x, posicionA.y, 10, color(0, 255, 0));
   
   // Bolas 2 y 4 en posición B
-  bolas[1] = new Bolas(posicionB.x, posicionB.y, 50, color(0, 0, 255));
-  bolas[3] = new Bolas(posicionB.x, posicionB.y, 50, color(255, 255, 0));
+  bolas[1] = new Bolas(posicionB.x, posicionB.y, 10, color(0, 0, 255));
+  bolas[3] = new Bolas(posicionB.x, posicionB.y, 10, color(255, 255, 0));
   
   // Mostrar solo la primera bola
   for (int i = 1; i < 4; i++) bolas[i].visible = false;

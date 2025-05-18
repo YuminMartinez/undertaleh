@@ -17,7 +17,7 @@ void setup(){
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
     
   katanas_iniciar();
-    inicializarBolas(); 
+   
 
 }
 
