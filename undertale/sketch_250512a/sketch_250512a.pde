@@ -5,12 +5,7 @@
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
 
-PImage darumaImg;
-Daruma daruma;
- PImage katana;
 
-curva curvaKatana;
-curva curvaKatana2;
   
 void setup(){
   size(1920, 1080); 
@@ -22,6 +17,7 @@ void setup(){
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
     
   katanas_iniciar();
+    inicializarBolas(); 
 
 }
 
@@ -62,6 +58,10 @@ void draw()
     {
      // PrintBarraAtaque();
       attackone();
+        // Solo mostrar bolas si el sistema está activo
+    bolas[bolaActual].display();
+    verificarColisiones();
+  
     }
     break;
       
