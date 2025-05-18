@@ -25,9 +25,12 @@ int player_choose = 0;
 boolean MenuBattle = false;
 boolean actionSelected = false;
 boolean atackMode = false;
-int PJLife = 99;
+boolean AtaqueRealizado = false;
 int PJMaxLife = 99;
+int PJLife = PJMaxLife;
 int barraAtaque;
+float pXrojo = width/6;
+float disRojo = width/1.5f;
 void secondStage()
 { 
   if(actionSelected == false)
@@ -83,13 +86,7 @@ void secondStage()
   fill(255);
   String HPrestante = " HP: " + PJLife;
   text(HPrestante,width/1.6f,height/1.1f);
-  /*textSize(32);
-  fill(100, 0, 0);
-  String vidasRestantes = "Vidas totales: " + vidas;
-  text(vidasRestantes, 50, 35);
-  String Score = "Puntuacion: " + puntuacion;
-  textSize(32);
-  text(Score, width - 250, 35);*/
+ 
 }
 void PJAttack()
 {
@@ -109,8 +106,6 @@ void PrintBarraAtaque()
   fill(255,0,0);
   stroke(255);
   strokeWeight(5);
-  float pXrojo = width/6;
-  float disRojo = width/1.5f;
   rect(pXrojo,height/1.8f,disRojo, height/5);
   // Ataque medio
   fill(255,255,0);
@@ -135,8 +130,30 @@ void PrintBarraAtaque()
   
 }
 
-int CalculateDmg()
+int  CalcularDañoPJ()
 {
+  int dmg = 0;
+  float zonaRojaInicio = pXrojo;
+  float zonaRojaFin = pXrojo + disRojo * 0.3f;
   
-  return 0;
+  float zonaAmarillaInicio = pXrojo + disRojo * 0.3f;
+  float zonaAmarillaFin = pXrojo + disRojo * 0.7f;
+  
+  float zonaVerdeInicio = pXrojo + disRojo * 0.45f;
+  float zonaVerdeFin = pXrojo + disRojo * 0.55f;
+
+  if ((barraAtaque >= zonaRojaInicio && barraAtaque < zonaRojaFin) || (barraAtaque >=zonaAmarillaFin && barraAtaque <=pXrojo+disRojo)) 
+  {
+    dmg = (int)random(10, 20);
+  } 
+  if (barraAtaque >= zonaAmarillaInicio && barraAtaque < zonaAmarillaFin) 
+  {
+    dmg = (int)random(30, 50);
+  } 
+  if (barraAtaque >= zonaVerdeInicio && barraAtaque < zonaVerdeFin) 
+  {
+    dmg = (int)random(60, 90);
+  } 
+  barraAtaque = width/6;
+  return dmg;
 }

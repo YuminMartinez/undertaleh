@@ -1,8 +1,46 @@
-int vida = 1000;
+int MaxvidaPNJ = 1000;
+int vidaPNJ = MaxvidaPNJ;
 int dmg = 1;
 PImage Enemy;
+boolean DañoMostrado = false; 
+int tiempoDañoMostrado = 0;
+int dañoDelJugador = 0;
 void PrintEnemy()
 {
   img = loadImage("SANESSS.png");
   image(img, width/4, 0,width/2,height/2);
+}
+void PrintVidaPNJ()
+{
+  if (DañoMostrado)
+  {
+    textSize(48);
+    fill(255, 0, 0);
+    text(dañoDelJugador, width/2, height/6);
+    
+    // Si han pasado más de 1000ms (1 segundo), oculta el daño
+    if (millis() - tiempoDañoMostrado > 1000) 
+    {
+      DañoMostrado = false;
+    }
+  
+  fill(255,0,0);
+  strokeWeight(0);
+  rect(width/3.5f,height/24,width/3.5f, height/20);
+  // Barra de vida verde que indica la vida que le queda al Enemigo
+  fill(0,255,0);
+  strokeWeight(0);
+  rect(width/3.5f,height/24,vidaPNJ*(width/3.5f)/MaxvidaPNJ, height/20);
+  }
+}
+void PNJRecibirDaño(int dmg)
+{
+  dañoDelJugador = dmg;
+  vidaPNJ -= dmg;
+  if(vidaPNJ < 0)
+  {
+     vidaPNJ = 0; 
+  } 
+  DañoMostrado = true;
+  tiempoDañoMostrado = millis();
 }

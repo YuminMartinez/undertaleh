@@ -8,6 +8,8 @@ void setup(){
   frameRate(30);
   background(0); 
   barraAtaque = width/6;
+  pXrojo = width/6;
+  disRojo = width/1.5f;
 }
 
 void draw() 
@@ -28,6 +30,7 @@ void draw()
     case SECOND_STAGE:
     PrintEnemy();
     secondStage();
+    PrintVidaPNJ();
     if(actionSelected)
     {
       switch(player_choose)
@@ -41,10 +44,16 @@ void draw()
        
       }
     }
-    if(atackMode && !actionSelected)
+    if(atackMode && !actionSelected && AtaqueRealizado == false)
     {
       PrintBarraAtaque();
     }
+    else if (AtaqueRealizado == true)
+    {
+     PNJRecibirDaño(CalcularDañoPJ()); 
+     AtaqueRealizado = false;
+     MenuBattle = true;
+     }
     break;
       
  
@@ -57,9 +66,5 @@ void draw()
  {
    PJLife = 0;
  }
-}
-
-void EnemySelected()
-{
-  
+ 
 }

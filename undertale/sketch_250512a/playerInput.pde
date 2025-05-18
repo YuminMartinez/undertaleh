@@ -21,7 +21,14 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
-  
+  if( atackMode == true)
+  {
+     if(keyCode == ENTER) 
+     {
+       atackMode = false;
+       AtaqueRealizado = true;
+     }
+  }
    if(actionSelected == true )
     {
       if(keyCode == SHIFT)
