@@ -3,12 +3,17 @@
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
 GameState gameState = GameState.FIRST_STAGE;
 
+PImage darumaImg;
+Daruma daruma;
+
 
 void setup(){
   size(1920, 1080); 
   frameRate(30);
   background(0); 
   barraAtaque = width/6;
+    darumaImg = loadImage("daruma.png"); 
+    daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
 }
 
 void draw() 

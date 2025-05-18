@@ -1,19 +1,25 @@
-/*
 class Position {
-    float x, y;
+  float x, y;
+  float sizeX, sizeY;
+
+  Position(float x, float y, float sizeX, float sizeY) {
+    this.x = x;
+    this.y = y;
+    this.sizeX = sizeX;
+    this.sizeY = sizeY;
+  }
 }
 
 class Daruma extends Position {
+     PImage img;
+  Daruma(float x, float y, float sizeX, float sizeY,PImage img) {
 
-  Daruma(float x, float y, float sizeX, float sizeY)
-    
-}*/
-
-
-void moveDaruma() {
-  if ( attackone = true ) {
-    if (key == 'w' || key == 'W') darumaY -= darumaSpeed;
-    if (key == 's' || key == 'S') darumaY += darumaSpeed;
-    if (key == 'a' || key == 'A') darumaX -= darumaSpeed;
-    if (key == 'd' || key == 'D') darumaX += darumaSpeed;
+    super(x, y, sizeX, sizeY);
+     this.img = img;
   }
+    
+
+  void display() {
+    image(img, x, y, sizeX, sizeY);
+  }
+}

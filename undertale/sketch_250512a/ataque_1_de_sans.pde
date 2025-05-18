@@ -19,6 +19,12 @@ void attackone() {
   float yPos = height/2.2f; 
   rect(xPos, yPos, lado, lado);  
   
+  
+  daruma.display();
+ /* 
+ 
+ 
+ 
  img = loadImage("daruma.png");
 
 // Tamaño del Daruma (ajustado al 50% del lado del cuadrado)
@@ -31,5 +37,5 @@ float darumaY = yPos + lado/2 - darumaSize/2;  // Centro Y
 
 // Dibuja el Daruma
 image(img, darumaX, darumaY, width/29.33f,height/25.5f);  
-  
+  */
 }
