@@ -15,7 +15,8 @@ void setup(){
     
     darumaImg = loadImage("daruma.png"); 
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
-    
+    // Carga las imágenes (¡asegúrate de tener los archivos en /data/!)
+
   katanas_iniciar();
    
 

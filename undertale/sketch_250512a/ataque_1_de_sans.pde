@@ -76,55 +76,47 @@ boolean juegoActivo = true; // Controla si el sistema de bolas está activo
 
 
 class Bolas extends Position {
-  float radio;
-  color colorBola;
-  boolean visible;  // Controla si la bola debe mostrarse
+  PImage imgSakura;  // Todos usan la misma imagen
+  boolean visible;
+  float tamano = 30; // Tamaño fijo para todas
   
   // Constructor
-  Bolas(float x, float y, float radio, color c) {
-    super(x, y, radio*2, radio*2);
-    this.radio = radio;
-    this.colorBola = c;
-    this.visible = true;  // Por defecto visible
+  Bolas(float x, float y) {
+    super(x, y,3,3);
+    this.imgSakura = loadImage("sakura.png"); // Carga la imagen aquí
+    this.visible = true;
   }
   
   void display() {
-    if (!visible) return;  // No dibujar si no es visible
-    
-    fill(colorBola);
-    noStroke();
-    ellipse(x, y, radio*2, radio*2);
+    if (!visible) return;
+    image(imgSakura, x, y, tamano, tamano); // Dibuja la flor
   }
   
-  // Verifica colisión con Daruma
+  // Colisión con Daruma (igual que antes)
   boolean colisionaConDaruma(Daruma daruma) {
-    if (!visible) return false;  // Si ya no es visible, no colisiona
-    
-    // Calcula distancia entre centros
-    float distancia = calculateDistance(x, y, daruma.x + daruma.sizeX/2, daruma.y + daruma.sizeY/2);
-    return (distancia < radio + daruma.sizeX/2);
+    if (!visible) return false;
+    return (x < daruma.x + daruma.sizeX && 
+            x + tamano > daruma.x && 
+            y < daruma.y + daruma.sizeY && 
+            y + tamano > daruma.y);
   }
 }
 
 
 void inicializarBolas() {
   int offsetVertical = -30;
-    posicionA = new PVector(curvaKatana.puntos_de_ctrl[0].x, curvaKatana.puntos_de_ctrl[0].y + offsetVertical);
+  posicionA = new PVector(curvaKatana.puntos_de_ctrl[0].x, curvaKatana.puntos_de_ctrl[0].y + offsetVertical);
   posicionB = new PVector(curvaKatana.puntos_de_ctrl[3].x, curvaKatana.puntos_de_ctrl[3].y + offsetVertical);
 
-  // Inicializar las 4 bolas (todas invisibles al inicio)
-  // Bolas 1 y 3 en posición A
-  bolas[0] = new Bolas(posicionA.x, posicionA.y, 10, color(255, 0, 0)); 
-  bolas[2] = new Bolas(posicionA.x, posicionA.y, 10, color(0, 255, 0));
+  // Todas las bolas son flores de sakura
+  bolas[0] = new Bolas(posicionA.x, posicionA.y);
+  bolas[1] = new Bolas(posicionB.x, posicionB.y);
+  bolas[2] = new Bolas(posicionA.x, posicionA.y);
+  bolas[3] = new Bolas(posicionB.x, posicionB.y);
   
-  // Bolas 2 y 4 en posición B
-  bolas[1] = new Bolas(posicionB.x, posicionB.y, 10, color(0, 0, 255));
-  bolas[3] = new Bolas(posicionB.x, posicionB.y, 10, color(255, 255, 0));
-  
-  // Mostrar solo la primera bola
+  // Solo la primera visible al inicio
   for (int i = 1; i < 4; i++) bolas[i].visible = false;
 }
-
 
 void verificarColisiones() {
 
