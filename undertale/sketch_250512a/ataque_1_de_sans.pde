@@ -23,7 +23,7 @@ void attackone() {
   float yPos = height/2.2f; 
   rect(xPos, yPos, lado, lado);  
   
-  
+    daruma.limitarMovimiento(xPos, yPos, xPos +lado, yPos + lado); 
   daruma.display();
   curvaKatana.curva_de_katanas();
   curvaKatana2.curva_de_katanas();
@@ -127,6 +127,28 @@ void inicializarBolas() {
 
 
 void verificarColisiones() {
+
+  
+  
+  //colision con  bezier daruma :
+  if (curvaKatana.colisionaConDaruma(daruma)||curvaKatana2.colisionaConDaruma(daruma))
+  {
+  println("¡Colisión detectada con el Daruma!");
+   PJLife--;
+  /////////////////
+  
+ 
+  
+  
+//  ---------LUTSSSSS ------------
+  
+  
+  
+  ////// 
+  
+  }
+  
+  
   if (!juegoActivo) return; // Si ya se recolectaron todas, no hacer nada
   
   if (bolas[bolaActual].colisionaConDaruma(daruma)) {
@@ -138,6 +160,25 @@ void verificarColisiones() {
     } else { // Si es la 4ta bola
       juegoActivo = false;
       println("¡TODAS LAS BOLAS RECOLECTADAS!");
+      
+      
+      
+      
+      ////////////////////////////////////////////////////////////////
+
+      
+      
+      //-------------------METER CASMBIO DE STAGEEEEEE------------------
+      
+      
+      
+      
+      
+      ///////////////////////////////////////////////////////////////////
+      
+      
+      
+      
     }
   }
 }

@@ -11,15 +11,20 @@ class Position {
 }
 
 class Daruma extends Position {
-     PImage img;
-  Daruma(float x, float y, float sizeX, float sizeY,PImage img) {
+  PImage img;
 
+  Daruma(float x, float y, float sizeX, float sizeY, PImage img) {
     super(x, y, sizeX, sizeY);
-     this.img = img;
+    this.img = img;
   }
-    
 
   void display() {
     image(img, x, y, sizeX, sizeY);
   }
+  
+  void limitarMovimiento(float minX, float minY, float maxX, float maxY) {
+  x = constrain(x, minX, maxX - sizeX);
+  y = constrain(y, minY, maxY - sizeY);
+}
+  
 }
