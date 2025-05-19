@@ -7,6 +7,7 @@ curva curvaKatana;
 curva curvaKatana2;
 boolean moveAttackOne = false ;
 
+boolean bezzerSuperado = false;
 void attackone() {
   //CUADRADO
   
@@ -25,8 +26,11 @@ void attackone() {
   
     daruma.limitarMovimiento(xPos, yPos, xPos +lado, yPos + lado); 
   daruma.display();
+  
+  if (bezzerSuperado == false){
   curvaKatana.curva_de_katanas();
   curvaKatana2.curva_de_katanas();
+  }
 }
 
 //bezzier
@@ -123,7 +127,7 @@ void verificarColisiones() {
   
   
   //colision con  bezier daruma :
-  if (curvaKatana.colisionaConDaruma(daruma)||curvaKatana2.colisionaConDaruma(daruma))
+  if (curvaKatana.colisionaConDaruma(daruma)&& bezzerSuperado == false||curvaKatana2.colisionaConDaruma(daruma )&& bezzerSuperado == false)
   {
   println("¡Colisión detectada con el Daruma!");
    PJLife--;
@@ -143,6 +147,8 @@ void verificarColisiones() {
   
   if (!juegoActivo)
   {
+    
+    bezzerSuperado = true;
     printShurikens();
   }// Si ya se recolectaron todas, no hacer nada
   
@@ -156,23 +162,7 @@ void verificarColisiones() {
       juegoActivo = false;
       println("¡TODAS LAS BOLAS RECOLECTADAS!");
       
-      
-      
-      
-      ////////////////////////////////////////////////////////////////
-
-      
-      
-      //-------------------METER CASMBIO DE STAGEEEEEE------------------
-      
-      
-      
-      
-      
-      ///////////////////////////////////////////////////////////////////
-      
-      
-      
+       
       
     }
   }
@@ -217,6 +207,7 @@ void inicializarCurvasShuriken() {
 
 void printShurikens()
 {
+ 
     // Dibujar todas las curvas del shuriken
     for (int i = 0; i < curvasShuriken.length; i++) {
         curvasShuriken[i].pintar_curva();
@@ -224,15 +215,17 @@ void printShurikens()
         // Dibujar puntos de control (debug para saber si estan dentro del cuadrado)
         stroke(255, 0, 0);
         strokeWeight(8);
+        
+        
         for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
             point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y);
             
-            
-            // Actualizar y dibujar shuriken
             shuriken.actualizar();
             shuriken.dibujar();
+          
         }
     } 
+    
 }
  
   
