@@ -18,7 +18,8 @@ void draw()
   background(0);
   
 // si llamamos a esta funcion durante el combate, podemos hacer que el jugador se mueva por la batalla si mantenemos presionada la tecla  keyPressed();
-  switch(gameState) {
+  switch(gameState) 
+  {
     case FIRST_STAGE:
       firstStage();
       break;
@@ -31,7 +32,7 @@ void draw()
     PrintEnemy();
     secondStage();
     PrintVidaPNJ();
-    if(actionSelected)
+    if(actionSelected || ActMode)
     {
       switch(player_choose)
       {
@@ -39,24 +40,39 @@ void draw()
           PJAttack();
           break;
        case 1:
+         PJAct();
+         break;
        case 2:
        case 3:
        
       }
     }
-    if(atackMode && !actionSelected && AtaqueRealizado == false)
+    if(CheckEnemy)
     {
-      PrintBarraAtaque();
+      CheckStatsEnemy();
+      if(ChangeToMain)
+      {
+        ChangeToMain = false;
+        MenuBattle = true;
+      }
     }
+    
+    if(atackMode && !actionSelected && AtaqueRealizado == false)
+      {
+        PrintBarraAtaque();
+      }
     else if (AtaqueRealizado == true)
-    {
-     PNJRecibirDaño(CalcularDañoPJ()); 
-     AtaqueRealizado = false;
-     MenuBattle = true;
-     }
+      {
+       PNJRecibirDaño(CalcularDañoPJ()); 
+       AtaqueRealizado = false;
+       MenuBattle = true;
+       }
+    if(ChangeToMain)
+      {
+        ChangeToMain = false;
+        MenuBattle = true;
+      }
     break;
-      
- 
   }
  if(PJLife > PJMaxLife)
  {

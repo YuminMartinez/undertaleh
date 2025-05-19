@@ -21,6 +21,58 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  if(CheckEnemy == true)
+  {
+    if(keyCode == ENTER && Checktext2 ) 
+       {
+         
+         Checktext2 = false;
+         CheckEnemy = false;
+         ChangeToMain = true;        
+       }
+    if(keyCode == ENTER && Checktext1)
+    {
+      Checktext1 = false;
+      Checktext2 = true;
+    }
+  }
+  if(ActMode == true)
+  {
+   if(keyCode == SHIFT)
+      {
+        ActMode = false;
+        MenuBattle = true;
+      }
+    if (keyCode == UP) 
+       {  
+           ActSelection--;
+           
+           if(ActSelection <0)
+             ActSelection = 0;
+       }
+     if (keyCode == DOWN) 
+       {  
+           ActSelection++;
+           if(ActSelection >1)
+            { ActSelection = 1;
+            }
+       }
+     if(keyCode == ENTER) 
+       {
+         switch(ActSelection)
+         {
+           case 0:
+               ActMode = false;
+               CheckEnemy = true;
+               Checktext1 = true;
+             break;
+           case 1:
+             ActMode = false;
+             FindObject = true;
+             break;
+         }
+       }
+  }
   if( atackMode == true)
   {
      if(keyCode == ENTER) 
@@ -38,10 +90,13 @@ void keyPressed()
       }
       if(keyCode == ENTER)
        {
-         actionSelected = false;
-         atackMode = true;
+         
+           actionSelected = false;
+           atackMode = true;
+       
+         }
        }
-    }
+    
     if(MenuBattle == true)
     {
        if (keyCode == LEFT) 
@@ -61,11 +116,16 @@ void keyPressed()
        {
          switch(player_choose)
          {
-          case 0:
-            MenuBattle = false;
-            actionSelected = true;
-            break;
+         case 0:
+           MenuBattle = false;
+           actionSelected = true;
+           break;
+         case 1:
+           MenuBattle = false;
+           ActMode = true;
+           break;
          }
+            
        }
     }
    
