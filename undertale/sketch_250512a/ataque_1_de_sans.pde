@@ -141,7 +141,10 @@ void verificarColisiones() {
   }
   
   
-  if (!juegoActivo) return; // Si ya se recolectaron todas, no hacer nada
+  if (!juegoActivo)
+  {
+    printShurikens();
+  }// Si ya se recolectaron todas, no hacer nada
   
   if (bolas[bolaActual].colisionaConDaruma(daruma)) {
     bolas[bolaActual].visible = false;
@@ -174,3 +177,65 @@ void verificarColisiones() {
     }
   }
 }
+
+
+
+///// segunda fase
+
+curba_interpolacion[] curvasShuriken = new curba_interpolacion[5];  // Array para 5 curvas
+Shuriken shuriken;
+PImage imgShuriken;
+
+ 
+  
+void inicializarCurvasShuriken() {
+    // Cargar imagen y crear shuriken
+  imgShuriken = loadImage("shuriken.png");
+  shuriken = new Shuriken(curvasShuriken, "shuriken.png");
+  
+   float lado = width * 0.15f;  // 15% del ancho de pantalla (más proporcional) 
+
+  // Posición X: 
+  float xPos = (width/3 + width/2) / 2 - lado/2 + 180; // +100px a la derecha
+  // Posición Y: 
+  float yPos = height/2.2f; 
+  // Crear 5 curvas con puntos de control aleatorios
+  for (int i = 0; i < curvasShuriken.length; i++) {
+    PVector[] puntos = new PVector[4];
+    for (int j = 0; j < 4; j++) {
+      
+       // Generar puntos dentro del cuadrado de ataque
+      float px = random(xPos, xPos + lado);
+          float py = random(yPos, yPos + lado);
+          puntos[j] = new PVector(px, py);
+    }
+    curvasShuriken[i] = new curba_interpolacion(puntos);
+    curvasShuriken[i].calcular_coefs();
+  }
+}
+  
+
+void printShurikens()
+{
+    // Dibujar todas las curvas del shuriken
+    for (int i = 0; i < curvasShuriken.length; i++) {
+        curvasShuriken[i].pintar_curva();
+        
+        // Dibujar puntos de control (debug para saber si estan dentro del cuadrado)
+        stroke(255, 0, 0);
+        strokeWeight(8);
+        for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
+            point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y);
+            
+            
+            // Actualizar y dibujar shuriken
+            shuriken.actualizar();
+            shuriken.dibujar();
+        }
+    } 
+}
+ 
+  
+  
+  
+  
