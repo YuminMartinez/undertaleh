@@ -19,6 +19,7 @@ void secondStageTransition() {
      gameState = GameState.SECOND_STAGE;
   }
   MenuBattle = true;
+   
 }
 
 int player_choose = 0;

@@ -21,6 +21,14 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  if(FindObject)
+  {
+    if(keyCode == ENTER)
+    {
+      FindObject = false;
+      ChangeToMain = true;
+    }
+  }
   if(CheckEnemy == true)
   {
     if(keyCode == ENTER && Checktext2 ) 
@@ -28,12 +36,15 @@ void keyPressed()
          
          Checktext2 = false;
          CheckEnemy = false;
-         ChangeToMain = true;        
+         ChangeToMain = true; 
+         CharNext = 0;
+         
        }
     if(keyCode == ENTER && Checktext1)
     {
       Checktext1 = false;
       Checktext2 = true;
+      CharNext = 0;
     }
   }
   if(ActMode == true)

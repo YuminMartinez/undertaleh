@@ -50,11 +50,10 @@ void draw()
     if(CheckEnemy)
     {
       CheckStatsEnemy();
-      if(ChangeToMain)
-      {
-        ChangeToMain = false;
-        MenuBattle = true;
-      }
+    }
+    if(FindObject)
+    {
+      SearchObject();
     }
     
     if(atackMode && !actionSelected && AtaqueRealizado == false)
