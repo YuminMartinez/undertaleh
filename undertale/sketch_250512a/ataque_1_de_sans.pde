@@ -35,7 +35,7 @@ void attackone() {
 
 //bezzier
 void katanas_iniciar() {
-  katana = loadImage("katana.jpg");
+  katana = loadImage("katana.png");
   float lado = width * 0.15f;
   float xPos = (width/3 + width/2) / 2 - lado/2 + 180;
   float yPos = height / 2.2f;
