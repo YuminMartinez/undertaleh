@@ -52,10 +52,10 @@ void katanas_iniciar() {
 
   // Curva superior (similar)
   PVector[] p2 = new PVector[4];
-  p2[0] = new PVector(xPos + lado * 0.1, yPos + lado * 0.4 + 5); // P0 fijo
-  p2[1] = new PVector(xPos + lado * 0.3, yPos + lado * 0.1 + 5); // P1 móvil
-  p2[2] = new PVector(xPos + lado * 0.7, yPos + lado * 0.7 + 5); // P2 móvil
-  p2[3] = new PVector(xPos + lado * 0.9, yPos + lado * 0.5 + 5); // P3 fijo
+  p2[0] = new PVector(xPos + lado * 0.1, yPos + lado * 0.4  -3); // P0 fijo
+  p2[1] = new PVector(xPos + lado * 0.3, yPos + lado * 0.1 - 3); // P1 móvil
+  p2[2] = new PVector(xPos + lado * 0.7, yPos + lado * 0.7 - 3); // P2 móvil
+  p2[3] = new PVector(xPos + lado * 0.9, yPos + lado * 0.5 - 3); // P3 fijo
 
   curvaKatana2 = new curva(p2, color(0, 255, 255));
   curvaKatana2.calcular_coefs();
@@ -64,7 +64,7 @@ void katanas_iniciar() {
 
 
 
-
+/////////////////////////------------------------curva interpolacion ----------/////////
 //BOLASS
 
 
@@ -205,27 +205,27 @@ void inicializarCurvasShuriken() {
 }
   
 
-void printShurikens()
-{
- 
-    // Dibujar todas las curvas del shuriken
-    for (int i = 0; i < curvasShuriken.length; i++) {
-        curvasShuriken[i].pintar_curva();
+void printShurikens() {
+    // Dibujar todas las curvas del shuriken (COMENTADO)
+    //for (int i = 0; i < curvasShuriken.length; i++) {
+    //    curvasShuriken[i].pintar_curva(); // <- curva oculta
         
-        // Dibujar puntos de control (debug para saber si estan dentro del cuadrado)
-        stroke(255, 0, 0);
-        strokeWeight(8);
+        // Dibujar puntos de control (COMENTADO)
+        //stroke(255, 0, 0);
+        //strokeWeight(8);
         
-        
-        for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
-            point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y);
+        //for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
+        //    point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y); // <- Puntos ocultos
             
+            // Solo esto se ejecuta: el shuriken
             shuriken.actualizar();
             shuriken.dibujar();
-          
-        }
-    } 
-    
+            if (shuriken.colisionaConDaruma(daruma)) {
+        PJLife--; // Reduce la vida del jugador
+        println("¡Colisión con Shuriken! Vida restante: " + PJLife);
+    }
+        //}
+    //} 
 }
  
   

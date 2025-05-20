@@ -53,7 +53,7 @@ class Shuriken {
     this.curvas = curvas;
     img = loadImage(imagenPath);
     posicion = new PVector();
-    velocidad = 0.005;
+    velocidad = 0.05;
     curvaActual = 0;
     parametroU = 0;
     angulo = 0;
@@ -104,4 +104,30 @@ void dibujar() {
     
     imageMode(CORNER); //PARA VOLVER  A DIBUJAR LAS IMAGENES EN EL CORNER
 }
+
+
+boolean colisionaConDaruma(Daruma daruma) {
+        // Calcula el radio aproximado del shuriken 
+        float radioShuriken = img.width * escala / 2;
+        
+        // Calcula el centro del shuriken
+        float centroX = posicion.x;
+        float centroY = posicion.y;
+        
+        // Calcula el centro del Daruma
+        float centroDarumaX = daruma.x + daruma.sizeX/2;
+        float centroDarumaY = daruma.y + daruma.sizeY/2;
+        
+        // Calcula la distancia entre centros
+        float distancia = calculateDistance(centroX, centroY, centroDarumaX, centroDarumaY);
+        
+        // Radio aproximado del Daruma
+        float radioDaruma = daruma.sizeX/2;
+        
+        // Hay colisión si la distancia es menor que la suma de radios
+        return distancia < (radioShuriken + radioDaruma);
+    }
+
+
+
 }

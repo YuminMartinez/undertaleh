@@ -79,7 +79,7 @@ class curva {
       translate(x, y);
       rotate(angulo);
       imageMode(CENTER);
-      image(katana, 0, 0, 10, 10);
+      image(katana, 0, 0, 30, 30);
       popMatrix();
     }
     imageMode(CORNER);
