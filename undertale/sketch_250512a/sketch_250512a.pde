@@ -32,7 +32,7 @@ void draw()
     PrintEnemy();
     secondStage();
     PrintVidaPNJ();
-    if(actionSelected || ActMode || lunchTime)
+    if(actionSelected || ActMode || lunchTime || ReallyMercy)
     {
       switch(player_choose)
       {
@@ -44,8 +44,10 @@ void draw()
          break;
        case 2:
          PrintBackpack();
+         break;
        case 3:
-       
+         TryToForgive();
+         break;
       }
     }
     if(EatFood)

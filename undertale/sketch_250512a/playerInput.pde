@@ -21,6 +21,25 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  
+  if(ReallyMercy)
+  {
+    if(keyCode == ENTER && Mercytext2)
+    {
+      CharNext = 0;
+      ended = false;
+      Mercytext2 = false;
+      ReallyMercy = false;
+      ChangeToMain = true;
+    }
+    if(keyCode == ENTER && Mercytext1)
+    {
+      Mercytext1 = false;
+      CharNext = 0;
+      ended = false;
+      Mercytext2 = true;
+    }
+  }
   if(EatFood)
   {
     if(keyCode == ENTER)
@@ -38,6 +57,11 @@ void keyPressed()
     {
       lunchTime = false;
       EatFood = true;
+    }
+    if(keyCode == SHIFT)
+    {
+      lunchTime = false;
+      MenuBattle = true;
     }
   }
   if(FindObject)
@@ -168,7 +192,10 @@ void keyPressed()
            MenuBattle = false;
            lunchTime = true;
            break;
-           
+         case 3:
+           MenuBattle = false;
+           ReallyMercy = true;   
+           Mercytext1 = true;
          }
             
        }

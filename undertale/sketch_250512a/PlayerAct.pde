@@ -20,14 +20,14 @@ void PJAct()
   fill(255);
   textSize(48);
   text("Check Stats Enemy", width/3.2f, height/1.7f);
-  text("Try to distract", width/3.5f, height/1.5f);
+  text("Search in the room", width/3.2f, height/1.5f);
   switch(ActSelection)
   {
     case 0:
       img = loadImage("daruma.png");
       image(img, width/6, height/1.8f,width/21.33f,height/13.5f);
       break;
-  case 1:
+    case 1:
       img = loadImage("daruma.png");
       image(img, width/6, height/1.6f,width/21.33f,height/13.5f);
       break;
