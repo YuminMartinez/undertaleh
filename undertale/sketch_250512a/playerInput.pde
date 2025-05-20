@@ -21,12 +21,38 @@ void keyPressed()
         transitionX = 0;// Cambia al segundo estado
     }
   }
+  if(EatFood)
+  {
+    if(keyCode == ENTER)
+    {
+      EatFood = false;
+      Eated = false;
+      ChangeToMain = true;
+      CharNext = 0;
+      ended = false;
+    }
+  }
+  if(lunchTime)
+  {
+    if(keyCode == ENTER)
+    {
+      lunchTime = false;
+      EatFood = true;
+    }
+  }
   if(FindObject)
   {
     if(keyCode == ENTER)
     {
       FindObject = false;
       ChangeToMain = true;
+      ended = false;
+      firstSearch = false;
+      CharNext = 0;
+      if(possibility == 4)
+      {
+       WeaponFinded = true; 
+      }
     }
   }
   if(CheckEnemy == true)
@@ -37,6 +63,7 @@ void keyPressed()
          Checktext2 = false;
          CheckEnemy = false;
          ChangeToMain = true; 
+         ended = false;
          CharNext = 0;
          
        }
@@ -44,9 +71,11 @@ void keyPressed()
     {
       Checktext1 = false;
       Checktext2 = true;
+      ended = false;
       CharNext = 0;
     }
   }
+  
   if(ActMode == true)
   {
    if(keyCode == SHIFT)
@@ -135,6 +164,11 @@ void keyPressed()
            MenuBattle = false;
            ActMode = true;
            break;
+         case 2:
+           MenuBattle = false;
+           lunchTime = true;
+           break;
+           
          }
             
        }

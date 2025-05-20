@@ -65,5 +65,9 @@ int  CalcularDañoPJ()
     dmg = (int)random(60, 90);
   } 
   barraAtaque = width/6;
+  if(WeaponFinded == true)
+  {
+    dmg += 50;
+  }
   return dmg;
 }

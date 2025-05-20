@@ -32,7 +32,7 @@ void draw()
     PrintEnemy();
     secondStage();
     PrintVidaPNJ();
-    if(actionSelected || ActMode)
+    if(actionSelected || ActMode || lunchTime)
     {
       switch(player_choose)
       {
@@ -43,9 +43,14 @@ void draw()
          PJAct();
          break;
        case 2:
+         PrintBackpack();
        case 3:
        
       }
+    }
+    if(EatFood)
+    {
+      EatFood();
     }
     if(CheckEnemy)
     {
