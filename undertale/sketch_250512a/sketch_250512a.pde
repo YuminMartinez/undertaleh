@@ -9,6 +9,8 @@ enum GameControl { RATON, CLICK_RATON }
 
 GameControl gameControl = GameControl.RATON;
 
+
+
   
 void setup(){
   size(1920, 1080); 

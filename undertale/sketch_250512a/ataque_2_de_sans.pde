@@ -1,6 +1,9 @@
 
 PImage toriil;
 
+enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO, UNDEFINED }
+
+PositionRect positionRect = PositionRect.UNDEFINED;
 
 void SecondAttack()
 {
@@ -8,8 +11,7 @@ void SecondAttack()
 
   
 image(toriil,width/2,height/2,100,100);
-  
-  
+    
 
   noFill();
   stroke(255);  // Borde blanco estilo Undertale
