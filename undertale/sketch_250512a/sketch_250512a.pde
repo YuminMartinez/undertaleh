@@ -1,3 +1,7 @@
+import ddf.minim.*;
+Minim minim;
+AudioPlayer SoundTrack;
+boolean SoundisON = false;
 //import gifAnimation.*;
 //Gif miGif;
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
@@ -10,6 +14,10 @@ void setup(){
   barraAtaque = width/6;
   pXrojo = width/6;
   disRojo = width/1.5f;
+  minim = new Minim(this);
+  SoundTrack = minim.loadFile("SoundTrack.mp3");
+  SoundTrack.setGain(-20);
+  
 }
 
 void draw() 
@@ -29,6 +37,11 @@ void draw()
     break;
     
     case SECOND_STAGE:
+    if(SoundisON == false)
+    {
+      SoundTrack.loop();
+      SoundisON = true;
+    }
     PrintEnemy();
     secondStage();
     PrintVidaPNJ();
