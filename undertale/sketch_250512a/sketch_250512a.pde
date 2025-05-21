@@ -18,6 +18,7 @@ void setup(){
     // Carga las imágenes (¡asegúrate de tener los archivos en /data/!)
   inicializarCurvasShuriken();
   katanas_iniciar();
+   inicializarSakurasShurikenFase();
    
 
 }

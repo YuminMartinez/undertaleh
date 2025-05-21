@@ -74,6 +74,12 @@ PVector posicionA, posicionB; // Solo declaramos los objetos, sin inicializar a�
 int bolaActual = 0;
 boolean juegoActivo = true; // Controla si el sistema de bolas está activo
 
+//sakura en shureken
+
+Bolas[] bolasShuriken = new Bolas[4];
+
+int      bolaShurikenActual = 0;
+boolean todasSakurasShurikenRecolectadas  = false; 
 
 
 
@@ -122,6 +128,26 @@ void inicializarBolas() {
   for (int i = 1; i < 4; i++) bolas[i].visible = false;
 }
 
+
+void inicializarSakurasShurikenFase() {
+    float lado = width * 0.15f;
+    float xPos = (width/3 + width/2)/2 - lado/2 + 180;
+    float yPos = height/2.2f;
+    
+    // Posiciones estratégicas donde el jugador debe moverse para esquivar
+    bolasShuriken[0] = new Bolas(xPos + lado*0.2, yPos + lado*0.2);
+    bolasShuriken[1] = new Bolas(xPos + lado*0.8, yPos + lado*0.2);
+    bolasShuriken[2] = new Bolas(xPos + lado*0.2, yPos + lado*0.8);
+    bolasShuriken[3] = new Bolas(xPos + lado*0.8, yPos + lado*0.8);
+    
+    // Solo la primera visible al inicio
+    for (int i = 1; i < bolasShuriken.length; i++) {
+        bolasShuriken[i].visible = false;
+    }
+    bolaShurikenActual = 0;
+    todasSakurasShurikenRecolectadas = false;
+}
+
 void verificarColisiones() {
 
   
@@ -145,12 +171,57 @@ void verificarColisiones() {
   }
   
   
-  if (!juegoActivo)
+  
+  
+  
+  
+  
+   // Fase de shurikens (bolasShuriken)
+    if (!juegoActivo && !todasSakurasShurikenRecolectadas) {
+        if (bolaShurikenActual < bolasShuriken.length && 
+            bolasShuriken[bolaShurikenActual].colisionaConDaruma(daruma)) {
+            
+            bolasShuriken[bolaShurikenActual].visible = false;
+            bolaShurikenActual++;
+            
+            if (bolaShurikenActual >= bolasShuriken.length) {
+                todasSakurasShurikenRecolectadas = true;
+                println("¡Todas las sakuras de shurikens recolectadas!");
+                
+
+            } else {
+                bolasShuriken[bolaShurikenActual].visible = true;
+            }
+        }
+    }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if (!juegoActivo && todasSakurasShurikenRecolectadas == false)
   {
     
     bezzerSuperado = true;
     printShurikens();
-  }// Si ya se recolectaron todas, no hacer nada
+ 
+    
+  }
+     if( todasSakurasShurikenRecolectadas == true)
+    {
+       SecondAttack();
+    }
   
   if (bolas[bolaActual].colisionaConDaruma(daruma)) {
     bolas[bolaActual].visible = false;
@@ -220,6 +291,18 @@ void printShurikens() {
             // Solo esto se ejecuta: el shuriken
             shuriken.actualizar();
             shuriken.dibujar();
+            
+            
+                if (!todasSakurasShurikenRecolectadas) {
+        for (int i = 0; i < bolasShuriken.length; i++) {
+            if (bolasShuriken[i].visible) {
+                bolasShuriken[i].display();
+            }
+        }
+                }
+            
+            
+            
             if (shuriken.colisionaConDaruma(daruma)) {
         PJLife--; // Reduce la vida del jugador
         println("¡Colisión con Shuriken! Vida restante: " + PJLife);
