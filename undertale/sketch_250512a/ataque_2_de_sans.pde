@@ -38,6 +38,7 @@ daruma.display();
  /* 
   
   // Rectángulo izquierdo 
+  
 rect(xPos + offset, yPos + offset, lado/3, lado - 2*offset);
 daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
 daruma.y = yPos + lado/2 - daruma.sizeY/2;  // Centrado 

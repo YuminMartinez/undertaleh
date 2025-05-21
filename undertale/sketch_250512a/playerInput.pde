@@ -1,6 +1,8 @@
 boolean showSecondStage = false;
 
-
+void mousePressed() {
+  
+}
 
 
 void keyPressed() 
