@@ -58,8 +58,8 @@ void draw()
     }
     if(atackMode && !actionSelected)
     {
-     // PrintBarraAtaque();
-    //  attackone();
+    // PrintBarraAtaque();
+      //attackone();
         // Solo mostrar bolas si el sistema está activo
     //bolas[bolaActual].display();
     //verificarColisiones();
