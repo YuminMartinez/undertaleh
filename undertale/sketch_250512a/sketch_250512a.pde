@@ -2,7 +2,7 @@
 //Gif miGif;
 
 //VARIABLES GLOBALES
-enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
+enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE, SECOND_SANSATTACK }
 GameState gameState = GameState.FIRST_STAGE;
 
 
@@ -59,10 +59,12 @@ void draw()
     if(atackMode && !actionSelected)
     {
      // PrintBarraAtaque();
-      attackone();
+    //  attackone();
         // Solo mostrar bolas si el sistema está activo
-    bolas[bolaActual].display();
-    verificarColisiones();
+    //bolas[bolaActual].display();
+    //verificarColisiones();
+    
+    SecondAttack();
   
     }
     break;

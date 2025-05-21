@@ -3,13 +3,13 @@ PImage toriil;
 
 void SecondAttack()
 {
-//  toriil = loadImage("toriil.png");
+toriil = loadImage("toriil.png");
   
-//   image(toriil,5,5,5,5);
-  
-  
+image(toriil,width/2,height/2,100,100);
   
   
+  
+  daruma.display();
   
   
  

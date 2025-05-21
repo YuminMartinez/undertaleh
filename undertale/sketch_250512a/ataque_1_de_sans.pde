@@ -220,7 +220,7 @@ void verificarColisiones() {
   }
      if( todasSakurasShurikenRecolectadas == true)
     {
-       SecondAttack();
+       ////////////////CAMBIAR EL GAME MODE
     }
   
   if (bolas[bolaActual].colisionaConDaruma(daruma)) {

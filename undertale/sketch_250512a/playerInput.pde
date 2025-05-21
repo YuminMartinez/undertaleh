@@ -65,17 +65,4 @@ void keyPressed()
     }
    
    
-   
-// por si quiere teclado  
-  int speed = 10;
-  if (keyCode == RIGHT) {
-    daruma.x +=speed;
-  } else if (keyCode == LEFT) {
-    daruma.x -= speed;
-  } else if (keyCode == UP) {
-    daruma.y -= speed;
-  } else if (keyCode == DOWN) {
-    daruma.y +=speed;
-  }
-
 }
