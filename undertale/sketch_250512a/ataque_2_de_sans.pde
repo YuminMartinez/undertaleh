@@ -1,6 +1,7 @@
 
 PImage toriil;
-
+ 
+ int numeroDeCuadrados = 6;
 void SecondAttack()
 {
 toriil = loadImage("toriil.png");
@@ -27,36 +28,38 @@ image(toriil,width/2,height/2,100,100);
   
   daruma.display();
   
-  
+  int offset = 5;
   
     noFill();
-  stroke(255);  // Borde blanco estilo Undertale
+   stroke(255, 0, 0, 150); // Rojo semitransparente  // Borde blanco estilo Undertale
   strokeWeight(3);  
   
-   //rect(xPos,yPos,  lado/3 ,lado); // rect izquierda 
-   
-   rect(xPos,yPos,lado, lado/3); // arriba 
-  
- // rect (xPos + lado - ,yPos,lado- 5,lado 5 );
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  // Rectángulo izquierdo 
+rect(xPos + offset, yPos + offset, lado/3, lado - 2*offset);
+
+// Rectángulo superior 
+rect(xPos + offset, yPos + offset, lado - 2*offset, lado/3);
+
+// Rectángulo derecho 
+rect(xPos + lado - lado/3 - offset, yPos + offset, lado/3, lado - 2*offset);
+  // rectangulo inferior
+  rect (xPos+offset, yPos+ lado -offset - lado/3,lado - offset- 3, lado/3);
+    
   
  //ultimo corchete del second atackk 
+ 
+
+ ///!!!!! el random no incluye el ultimo numero lolaxooo)
+ for ( int i = 0; i <= numeroDeCuadrado; i++)
+ {
+ 
+ /*   switch(i)
+    {
+     case 1:
+     
+      
+    }
+ */
+ 
+ 
 }
