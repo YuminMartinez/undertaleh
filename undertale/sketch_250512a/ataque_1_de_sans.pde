@@ -7,12 +7,15 @@ curva curvaKatana;
 curva curvaKatana2;
 boolean moveAttackOne = false ;
 
+
+
+
+
+
 boolean bezzerSuperado = false;
 void attackone() {
   //CUADRADO
-  bolas[bolaActual].display();
-    verificarColisiones();
-    
+  
   moveAttackOne = true;
   noFill();
   stroke(255);  // Borde blanco estilo Undertale
