@@ -1,9 +1,9 @@
 
 PImage toriil;
 
-enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO, UNDEFINED }
+enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO}
 
-PositionRect positionRect = PositionRect.UNDEFINED;
+PositionRect positionRect;
 
 void SecondAttack()
 {
@@ -37,15 +37,15 @@ daruma.display();
    stroke(255, 0, 0, 150); // Rojo semitransparente  // Borde blanco estilo Undertale
   strokeWeight(3);  
 
- /* 
+ 
   
   // Rectángulo izquierdo 
   
 rect(xPos + offset, yPos + offset, lado/3, lado - 2*offset);
 daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
 daruma.y = yPos + lado/2 - daruma.sizeY/2;  // Centrado 
+positionRect = PositionRect.IZQUIERDA ;
 
-*/
 
 
 /*
@@ -53,7 +53,7 @@ daruma.y = yPos + lado/2 - daruma.sizeY/2;  // Centrado
 rect(xPos + offset, yPos + offset, lado - 2*offset, lado/3);
 daruma.x =  xPos + lado/2 - daruma.sizeX/2 ;
 daruma.y = yPos - daruma.sizeY; // fuera del borde superior
-
+positionRect = PositionRect.ARRIBA ;
 
 */
 /*
@@ -62,7 +62,7 @@ daruma.y = yPos - daruma.sizeY; // fuera del borde superior
 rect(xPos + lado - lado/3 - offset, yPos + offset, lado/3, lado - 2*offset);
 daruma.x =  xPos + lado - daruma.sizeX/2 ;
 daruma.y =  yPos + lado/2 - daruma.sizeY/2; // fuera del borde superior
-
+positionRect = PositionRect.DERECHA ;
 
 */
   // rectangulo inferior
@@ -71,7 +71,7 @@ daruma.y =  yPos + lado/2 - daruma.sizeY/2; // fuera del borde superior
   daruma.x = xPos + lado/2 - daruma.sizeX/2;
     
   daruma.y = yPos + lado -daruma.sizeY/2;
-
+positionRect = PositionRect.ABAJO ;
 
   int numeroDeCuadrados = 6;
 
@@ -89,12 +89,29 @@ daruma.y =  yPos + lado/2 - daruma.sizeY/2; // fuera del borde superior
  
  
 }
+
+
+
+if (estaSaltando) {
+  if (!volviendo) {
+    // Fase 1: ir al objetivo
+    daruma.x = lerp(daruma.x, xObjetivo, 0.2);
+    daruma.y = lerp(daruma.y, yObjetivo, 0.2);
+
+    if (dist(daruma.x, daruma.y, xObjetivo, yObjetivo) < 1) {
+      volviendo = true; // Cambiar a la fase de volver
+    }
+  } else {
+    // Fase 2: volver a la posición original
+    daruma.x = lerp(daruma.x, xOriginal, 0.2);
+    daruma.y = lerp(daruma.y, yOriginal, 0.2);
+
+    if (dist(daruma.x, daruma.y, xOriginal, yOriginal) < 1) {
+      estaSaltando = false;
+      volviendo = false;
+    }
+  }
 }
-
-
-
-
-
-
-
-//// RECTANGULOS PEQUEÑOS ORGANIZACION
+  
+  println("Y daruma:", daruma.y, " Saltando:", estaSaltando);
+}
