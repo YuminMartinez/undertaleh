@@ -4,9 +4,10 @@ boolean Eated = false;
 int healthRecovered = 0;
 void PrintBackpack()
 {
-  noFill();
+ 
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   fill(255);
   textSize(48);
@@ -22,9 +23,10 @@ void EatFood()
     PJLife += healthRecovered;
     Eated = true;
   }
-  noFill();
+  
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   fill(255);
   textSize(48); 

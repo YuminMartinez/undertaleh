@@ -1,8 +1,9 @@
 void PJAttack()
 {
-  noFill();
+  
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   img = loadImage("daruma.png");
   image(img, width/6, height/1.6f,width/21.33f,height/13.5f);

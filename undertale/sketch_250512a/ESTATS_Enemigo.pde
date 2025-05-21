@@ -7,8 +7,8 @@ int tiempoDañoMostrado = 0;
 int dañoDelJugador = 0;
 void PrintEnemy()
 {
-  img = loadImage("SANESSS.png");
-  image(img, width/4, 0,width/2,height/2);
+  img = loadImage("SansSamurai.png");
+  image(img, width/3, height/6,width/3,height/2);
 }
 void PrintVidaPNJ()
 {

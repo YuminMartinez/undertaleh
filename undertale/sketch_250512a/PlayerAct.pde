@@ -13,9 +13,10 @@ boolean FindObject = false;
 boolean WeaponFinded = false;
 void PJAct()
 {
-  noFill();
+  //noFill();
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   fill(255);
   textSize(48);
@@ -37,9 +38,9 @@ void PJAct()
 void CheckStatsEnemy()
 {
   
-  noFill();
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   fill(255);
   textSize(48); 
@@ -95,9 +96,10 @@ void SearchObject()
      possibility = (int)random(1,5);
      firstSearch = true;
   }
-  noFill();
+  
   stroke(255);
   strokeWeight(5);
+  fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   if(possibility == 4 && WeaponFinded == false)
   {
@@ -115,6 +117,7 @@ void SearchObject()
     }
     textAlign(LEFT, LEFT);
     String Visible = SwordFinded.substring(0,CharNext);
+    fill(255);
     text(Visible, width/4.9f, height/1.6f);
     if(SwordFinded.length() == Visible.length())
       {
@@ -136,6 +139,7 @@ void SearchObject()
     }
     textAlign(LEFT, LEFT);
     String Visible = TryFind.substring(0,CharNext);
+    fill(255);
     text(Visible, width/4.9f, height/1.6f);
     if(TryFind.length() == Visible.length())
       {
