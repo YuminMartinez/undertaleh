@@ -5,6 +5,9 @@
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE, SECOND_SANSATTACK }
 GameState gameState = GameState.FIRST_STAGE;
 
+enum GameControl { RATON, CLICK_RATON }
+
+GameControl gameControl = GameControl.RATON;
 
   
 void setup(){
@@ -19,6 +22,7 @@ void setup(){
   inicializarCurvasShuriken();
   katanas_iniciar();
    inicializarSakurasShurikenFase();
+    toriil = loadImage("toriil.png");
    
 
 }
@@ -27,8 +31,11 @@ void draw()
 {
   frameRate(30);
   background(0);
+      
+  if (gameControl == GameControl.RATON) {
     daruma.x = mouseX - daruma.sizeX / 2;
     daruma.y = mouseY - daruma.sizeY / 2;
+  }
 
 // si llamamos a esta funcion durante el combate, podemos hacer que el jugador se mueva por la batalla si mantenemos presionada la tecla  keyPressed();
   switch(gameState) {

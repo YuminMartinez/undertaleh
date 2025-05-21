@@ -1,10 +1,11 @@
 
 PImage toriil;
- 
- int numeroDeCuadrados = 6;
+
+
 void SecondAttack()
 {
-toriil = loadImage("toriil.png");
+  gameControl = GameControl.CLICK_RATON;
+
   
 image(toriil,width/2,height/2,100,100);
   
@@ -26,31 +27,47 @@ image(toriil,width/2,height/2,100,100);
 
   
   
-  daruma.display();
+daruma.display();
   
   int offset = 5;
   
     noFill();
    stroke(255, 0, 0, 150); // Rojo semitransparente  // Borde blanco estilo Undertale
   strokeWeight(3);  
+
+  
   
   // Rectángulo izquierdo 
 rect(xPos + offset, yPos + offset, lado/3, lado - 2*offset);
+daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
+daruma.y = yPos + lado/2 - daruma.sizeY/2;  // Centrado verticalmente
+daruma.display();
+
+
 
 // Rectángulo superior 
 rect(xPos + offset, yPos + offset, lado - 2*offset, lado/3);
+daruma.x =  (xPos + lado)/2 - daruma.sizeX/2 ;
+daruma.y = yPos - daruma.sizeY; // fuera del borde superior
+daruma.display();
 
-// Rectángulo derecho 
+
+
+
+
+ //Rectángulo derecho 
 rect(xPos + lado - lado/3 - offset, yPos + offset, lado/3, lado - 2*offset);
   // rectangulo inferior
   rect (xPos+offset, yPos+ lado -offset - lado/3,lado - offset- 3, lado/3);
     
-  
- //ultimo corchete del second atackk 
- 
+    
+
+
+
+  int numeroDeCuadrados = 6;
 
  ///!!!!! el random no incluye el ultimo numero lolaxooo)
- for ( int i = 0; i <= numeroDeCuadrado; i++)
+ for ( int i = 0; i <= numeroDeCuadrados; i++)
  {
  
  /*   switch(i)
@@ -63,3 +80,12 @@ rect(xPos + lado - lado/3 - offset, yPos + offset, lado/3, lado - 2*offset);
  
  
 }
+}
+
+
+
+
+
+
+
+//// RECTANGULOS PEQUEÑOS ORGANIZACION
