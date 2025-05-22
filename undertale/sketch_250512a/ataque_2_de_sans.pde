@@ -5,8 +5,8 @@ enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO }
 boolean SecondStageActive = false;
 boolean mostrarAdvertencia = false;
 boolean mostrarAtaque = false;
-int tiempoAdvertencia = 600; // 800ms de advertencia
-int tiempoAtaque = 1500;    // 1500ms de ataque visible
+int tiempoAdvertencia = 400; // 800ms de advertencia
+int tiempoAtaque = 1000;    // 1500ms de ataque visible
 int tiempoInicioAtaque = 0;
 PositionRect posicionActual;
 
@@ -152,17 +152,18 @@ void SecondAttack() {
 
 void manejarSalto() {
   if (!volviendo) {
-    daruma.x = lerp(daruma.x, xObjetivo, 0.1);
-    daruma.y = lerp(daruma.y, yObjetivo, 0.1);
+    float velocidad = 0.2f;
+    daruma.x = lerp(daruma.x, xObjetivo,velocidad);
+    daruma.y = lerp(daruma.y, yObjetivo, velocidad);
 
-    if (dist(daruma.x, daruma.y, xObjetivo, yObjetivo) < 5) {
+    if ( calculateDistance(daruma.x, daruma.y, xObjetivo, yObjetivo) < 5) {
       volviendo = true;
     }
   } else {
-    daruma.x = lerp(daruma.x, xOriginal, 0.1);
-    daruma.y = lerp(daruma.y, yOriginal, 0.1);
+    daruma.x = lerp(daruma.x, xOriginal, velocidad);
+    daruma.y = lerp(daruma.y, yOriginal, velocidad);
 
-    if (dist(daruma.x, daruma.y, xOriginal, yOriginal) < 5) {
+    if ( calculateDistance(daruma.x, daruma.y, xOriginal, yOriginal) < 5) {
       estaSaltando = false;
       volviendo = false;
     }

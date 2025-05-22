@@ -1,4 +1,4 @@
-class curba_interpolacion {
+ class curba_interpolacion {
   PVector[] puntos_de_ctrl;
   PVector[] coefs;
 
