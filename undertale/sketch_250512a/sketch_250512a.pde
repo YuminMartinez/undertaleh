@@ -75,7 +75,11 @@ void draw()
     break;
     
     case PNJ_ATTACK:
-    
+     PrintEnemy();
+    secondStage();
+    PrintVidaPNJ();
+    attackone();
+      
   }
   
  if(PJLife > PJMaxLife)

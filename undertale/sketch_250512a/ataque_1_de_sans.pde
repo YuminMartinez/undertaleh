@@ -14,12 +14,18 @@ boolean moveAttackOne = false ;
 
 boolean bezzerSuperado = false;
 void attackone() {
+  
+  bolas[bolaActual].display();
+  verificarColisiones();
+  
+  
   //CUADRADO
    gameControl = GameControl.RATON;
   moveAttackOne = true;
-  noFill();
+
   stroke(255);  // Borde blanco estilo Undertale
   strokeWeight(3);  // Más grueso para que se vea épico
+  fill(0);
   // Tamaño del cuadrado 
   float lado = width * 0.15f;  // 15% del ancho de pantalla (más proporcional) 
 
@@ -83,7 +89,7 @@ boolean juegoActivo = true; // Controla si el sistema de bolas está activo
 
 Bolas[] bolasShuriken = new Bolas[4];
 
-int      bolaShurikenActual = 0;
+int bolaShurikenActual = 0;
 boolean todasSakurasShurikenRecolectadas  = false; 
 
 
