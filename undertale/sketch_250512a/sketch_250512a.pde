@@ -7,6 +7,7 @@ AudioPlayer GameOver;
 AudioPlayer HeartBreak;
 boolean SoundisON = false;
 PImage SpriteEnemy1;
+PImage SansInicio;
 //import gifAnimation.*;
 //Gif miGif;
 int timeTransition = 0;
@@ -27,6 +28,7 @@ void setup(){
   background(0); 
   barraAtaque = width/6;
     posY_Dead = height/2;
+    SansInicio = loadImage("sansInicio.png");
     darumaImg = loadImage("daruma.png"); 
     DarumaFeito = RecibeDaño(darumaImg);
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);

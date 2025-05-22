@@ -1,12 +1,14 @@
 void firstStage() {
+  
+
   // Rectángulo principal
   float anchoPrincipal = 950;
   float altoPrincipal = 400;
   float posXPrincipal = (width - anchoPrincipal) / 2;
-  float posYPrincipal = (height / 2) - (altoPrincipal / 2) + 100;
+  float posYPrincipal  = (height / 2) - (altoPrincipal / 2) + 100;
 
   drawRectWithText(posXPrincipal, posYPrincipal, anchoPrincipal, altoPrincipal,    "BATTLE AGAINST SANS Feudal\n - UNDERTALE HOMAGE -",  40  );
-
+  image(SansInicio,posXPrincipal+300,posYPrincipal -400 ,400,400);
   // Texto de "PRESS SPACE TO START"
   fill(255); 
   textSize(40);
