@@ -1,6 +1,43 @@
-boolean showSecondStage = false;
+boolean estaSaltando = false;
+boolean volviendo = false;
 
+float xOriginal, yOriginal;
+float xObjetivo, yObjetivo;
 
+float velocidad = 5;  // velocidad de salto (ajustable)
+
+void mousePressed() {
+  if(SecondStageActive == true)
+{
+  if (!estaSaltando) {
+    gameControl = GameControl.CLICK_RATON; // Fuerza el modo CLICK_RATON
+    estaSaltando = true;
+    volviendo = false;
+    xOriginal = daruma.x;
+    yOriginal = daruma.y;
+    float distanciaSalto = 150;  // Ajusta según necesidad
+
+    switch (positionRect) {
+      case IZQUIERDA:
+        xObjetivo = daruma.x + distanciaSalto;
+        yObjetivo = daruma.y;
+        break;
+      case DERECHA:
+        xObjetivo = daruma.x - distanciaSalto;
+        yObjetivo = daruma.y;
+        break;
+      case ARRIBA:
+        xObjetivo = daruma.x;
+        yObjetivo = daruma.y + distanciaSalto;
+        break;
+      case ABAJO:
+        xObjetivo = daruma.x;
+        yObjetivo = daruma.y - distanciaSalto;
+        break;
+    }
+  }
+}
+}
 
 
 void keyPressed() 
@@ -199,9 +236,9 @@ void keyPressed()
          }
             
        }
+       
+
     }
    
- 
-  
- 
+   
 }
