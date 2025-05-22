@@ -5,12 +5,11 @@ enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO }
 boolean SecondStageActive = false;
 boolean mostrarAdvertencia = false;
 boolean mostrarAtaque = false;
-int tiempoAdvertencia = 800; // 800ms de advertencia
+int tiempoAdvertencia = 600; // 800ms de advertencia
 int tiempoAtaque = 1500;    // 1500ms de ataque visible
 int tiempoInicioAtaque = 0;
 PositionRect posicionActual;
 
-// Variables de salto
 
 void SecondAttack() {
   SecondStageActive = true;
@@ -25,6 +24,10 @@ void SecondAttack() {
   float yPos = height / 2.2f;
   rect(xPos, yPos, lado, lado);
 
+  // Definir posición central (objetivo del salto)
+  float centroX = xPos + lado/2;
+  float centroY = yPos + lado/2;
+
   // Lógica de temporización del ataque
   if (!mostrarAdvertencia && !mostrarAtaque) {
     // Iniciar nuevo ataque
@@ -35,29 +38,26 @@ void SecondAttack() {
     // Posición inicial del Daruma según el ataque
     switch(posicionActual) {
       case ABAJO:
-       
-  daruma.x = xPos + lado/2 - daruma.sizeX/2;
-    
-  daruma.y = yPos + lado -daruma.sizeY/2;
-
+        daruma.x = xPos + lado/2 - daruma.sizeX/2;
+        daruma.y = yPos + lado - daruma.sizeY/2;
         break;
       case ARRIBA:
-        daruma.x =  xPos + lado/2 - daruma.sizeX/2 ;
-daruma.y = yPos - daruma.sizeY; // fuera del borde superior
-
+        daruma.x = xPos + lado/2 - daruma.sizeX/2;
+        daruma.y = yPos - daruma.sizeY;
         break;
       case DERECHA:
-        daruma.x =  xPos + lado - daruma.sizeX/2 ;
-daruma.y =  yPos + lado/2 - daruma.sizeY/2; // fuera del borde superior
-
+        daruma.x = xPos + lado - daruma.sizeX/2;
+        daruma.y = yPos + lado/2 - daruma.sizeY/2;
         break;
       case IZQUIERDA:
-      daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
-daruma.y = yPos + lado/2 - daruma.sizeY/2;
+        daruma.x = xPos - daruma.sizeX;
+        daruma.y = yPos + lado/2 - daruma.sizeY/2;
         break;
     }
     xOriginal = daruma.x;
     yOriginal = daruma.y;
+    xObjetivo = centroX; // El salto va al centro
+    yObjetivo = centroY;
   }
 
   // Variables para posición del ataque
@@ -75,8 +75,6 @@ daruma.y = yPos + lado/2 - daruma.sizeY/2;
       rectX = xPos + offset;
       rectY = yPos + lado - offset - rectH;
       rotation = 0;
-      xObjetivo = rectX + rectW/2;
-      yObjetivo = rectY + rectH + daruma.sizeY;
       imgWidth = rectW; 
       imgHeight = rectH;
       break;
@@ -87,8 +85,6 @@ daruma.y = yPos + lado/2 - daruma.sizeY/2;
       rectX = xPos + offset;
       rectY = yPos + offset;
       rotation = PI;
-      xObjetivo = rectX + rectW/2;
-      yObjetivo = rectY - daruma.sizeY;
       imgWidth = rectW; 
       imgHeight = rectH;
       break;
@@ -99,8 +95,6 @@ daruma.y = yPos + lado/2 - daruma.sizeY/2;
       rectX = xPos + lado - rectW - offset;
       rectY = yPos + offset;
       rotation = -HALF_PI;
-      xObjetivo = rectX + rectW + daruma.sizeX/2;
-      yObjetivo = rectY + rectH/2;
       imgWidth = rectH; 
       imgHeight = rectW;
       break;
@@ -111,8 +105,6 @@ daruma.y = yPos + lado/2 - daruma.sizeY/2;
       rectX = xPos + offset;
       rectY = yPos + offset;
       rotation = HALF_PI;
-      xObjetivo = rectX - daruma.sizeX/2;
-      yObjetivo = rectY + rectH/2;
       imgWidth = rectH; 
       imgHeight = rectW;
       break;
