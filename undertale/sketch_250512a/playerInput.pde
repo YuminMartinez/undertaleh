@@ -68,6 +68,7 @@ void keyPressed()
       Mercytext2 = false;
       ReallyMercy = false;
       ChangeToMain = true;
+       timeTransition = millis();
     }
     if(keyCode == ENTER && Mercytext1)
     {
@@ -86,6 +87,7 @@ void keyPressed()
       ChangeToMain = true;
       CharNext = 0;
       ended = false;
+       timeTransition = millis();
     }
   }
   if(lunchTime)
@@ -114,6 +116,7 @@ void keyPressed()
       {
        WeaponFinded = true; 
       }
+       timeTransition = millis();
     }
   }
   if(CheckEnemy == true)
@@ -126,6 +129,7 @@ void keyPressed()
          ChangeToMain = true; 
          ended = false;
          CharNext = 0;
+          timeTransition = millis();
          
        }
     if(keyCode == ENTER && Checktext1)

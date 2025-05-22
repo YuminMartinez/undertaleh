@@ -5,9 +5,9 @@ boolean SoundisON = false;
 PImage SpriteEnemy1;
 //import gifAnimation.*;
 //Gif miGif;
-
+int timeTransition = 0;
 //VARIABLES GLOBALES
-enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE, SECOND_SANSATTACK }
+enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,PNJ_ATTACK ,SECOND_SANSATTACK }
 GameState gameState = GameState.FIRST_STAGE;
 
 enum GameControl { RATON, CLICK_RATON }
@@ -50,14 +50,15 @@ void draw()
     daruma.x = mouseX - daruma.sizeX / 2;
     daruma.y = mouseY - daruma.sizeY / 2;
   }
-
+ 
 // si llamamos a esta funcion durante el combate, podemos hacer que el jugador se mueva por la batalla si mantenemos presionada la tecla  keyPressed();
   switch(gameState) 
   {
     case FIRST_STAGE:
       firstStage();
       break;
-            
+      
+         
     case TRANSITION:
     secondStageTransition();
     break;
@@ -67,58 +68,16 @@ void draw()
     {
       SoundTrack.loop();
       SoundisON = true;
+     
     }
-    PrintEnemy();
-    secondStage();
-    PrintVidaPNJ();
-    if(actionSelected || ActMode || lunchTime || ReallyMercy)
-    {
-      switch(player_choose)
-      {
-      case 0:
-          PJAttack();
-          break;
-       case 1:
-         PJAct();
-         break;
-       case 2:
-         PrintBackpack();
-         break;
-       case 3:
-         TryToForgive();
-         break;
-      }
-    }
-    if(EatFood)
-    {
-      EatFood();
-    }
-    if(CheckEnemy)
-    {
-      CheckStatsEnemy();
-    }
-    if(FindObject)
-    {
-      SearchObject();
-    }
-    
-    if(atackMode && !actionSelected && AtaqueRealizado == false)
-      {
-        PrintBarraAtaque();
-      }
-    else if (AtaqueRealizado == true)
-      {
-       PNJRecibirDaño(CalcularDañoPJ()); 
-       AtaqueRealizado = false;
-       MenuBattle = true;
-       }
-    if(ChangeToMain)
-      {
-        ChangeToMain = false;
-        MenuBattle = true;
-      }
+     ActionsPlayer();
+       
     break;
+    
+    case PNJ_ATTACK:
+    
   }
+  
  if(PJLife > PJMaxLife)
  {
    PJLife = PJMaxLife;
@@ -128,4 +87,13 @@ void draw()
    PJLife = 0;
  }
  
+  if(ChangeToMain)
+      {
+        if(millis() - timeTransition > 1000)
+        {
+        ChangeToMain = false;
+         //MenuBattle = true;
+       gameState = GameState.PNJ_ATTACK;
+        }
+      }  
 }
