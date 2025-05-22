@@ -5,11 +5,11 @@ enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO }
 boolean SecondStageActive = false;
 boolean mostrarAdvertencia = false;
 boolean mostrarAtaque = false;
-int tiempoAdvertencia = 400; // 800ms de advertencia
-int tiempoAtaque = 1000;    // 1500ms de ataque visible
+int tiempoAdvertencia =500; // 800ms de advertencia
+int tiempoAtaque = 2000;    // 1500ms de ataque visible
 int tiempoInicioAtaque = 0;
 PositionRect posicionActual;
-
+boolean colisionActiva = false;
 
 void SecondAttack() {
   SecondStageActive = true;
@@ -121,6 +121,7 @@ void SecondAttack() {
     if (millis() - tiempoInicioAtaque > tiempoAdvertencia) {
       mostrarAdvertencia = false;
       mostrarAtaque = true;
+      colisionActiva = true;
       tiempoInicioAtaque = millis();
     }
   }
@@ -138,8 +139,30 @@ void SecondAttack() {
     // Finalizar ataque después del tiempo establecido
     if (millis() - tiempoInicioAtaque > tiempoAtaque) {
       mostrarAtaque = false;
+      colisionActiva = false;
     }
   }
+  
+  
+   if (colisionActiva) {
+      // Calculamos las coordenadas reales del Torii (sin rotación para simplificar)
+      float toriiX = rectX;
+      float toriiY = rectY;
+      float toriiW = rectW;
+      float toriiH = rectH;
+      
+      if (colisionDarumaTorii(toriiX, toriiY, toriiW, toriiH)) {
+        // ¡Colisión detectada!
+        println("¡Colisión con el Torii!");
+        colisionActiva = false; // Evitar múltiples detecciones
+        mostrarAtaque = false;  // Terminar el ataque
+        PJLife--;
+        
+     
+      }
+    }
+  
+  
 
   // Lógica del salto
   if (estaSaltando) {
@@ -149,23 +172,50 @@ void SecondAttack() {
   // Dibujar el Daruma
   daruma.display();
 }
-
+float velocidadSalto = 0.3f;
 void manejarSalto() {
   if (!volviendo) {
-    float velocidad = 0.2f;
-    daruma.x = lerp(daruma.x, xObjetivo,velocidad);
-    daruma.y = lerp(daruma.y, yObjetivo, velocidad);
+    // Movimiento hacia el centro usando intlineal
+    daruma.x = intlineal(daruma.x, xObjetivo, velocidadSalto);
+    daruma.y = intlineal(daruma.y, yObjetivo, velocidadSalto);
 
-    if ( calculateDistance(daruma.x, daruma.y, xObjetivo, yObjetivo) < 5) {
+    // Verificación de llegada al centro
+    if (calculateDistance(daruma.x, daruma.y, xObjetivo, yObjetivo) < 5) {
       volviendo = true;
+     
     }
   } else {
-    daruma.x = lerp(daruma.x, xOriginal, velocidad);
-    daruma.y = lerp(daruma.y, yOriginal, velocidad);
+    // Movimiento de regreso usando intlineal
+    daruma.x = intlineal(daruma.x, xOriginal, velocidadSalto);
+    daruma.y = intlineal(daruma.y, yOriginal, velocidadSalto);
 
-    if ( calculateDistance(daruma.x, daruma.y, xOriginal, yOriginal) < 5) {
+    // Verificación de llegada al origen
+    if (calculateDistance(daruma.x, daruma.y, xOriginal, yOriginal) < 5) {
       estaSaltando = false;
       volviendo = false;
+   
     }
   }
+}
+
+   
+
+boolean colisionDarumaTorii(float toriiX, float toriiY, float toriiW, float toriiH) {
+    // Área de colisión del Daruma (ajustar según tus necesidades)
+    float darumaLeft = daruma.x;
+    float darumaRight = daruma.x + daruma.sizeX;
+    float darumaTop = daruma.y;
+    float darumaBottom = daruma.y + daruma.sizeY;
+    
+    // Área de colisión del Torii
+    float toriiLeft = toriiX;
+    float toriiRight = toriiX + toriiW;
+    float toriiTop = toriiY;
+    float toriiBottom = toriiY + toriiH;
+    
+    // Detectar superposición
+    return darumaRight > toriiLeft && 
+           darumaLeft < toriiRight && 
+           darumaBottom > toriiTop && 
+           darumaTop < toriiBottom;
 }
