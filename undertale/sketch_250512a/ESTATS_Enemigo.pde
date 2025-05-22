@@ -7,12 +7,11 @@ int tiempoDañoMostrado = 0;
 int dañoDelJugador = 0;
 void PrintEnemy()
 {
-  img = loadImage("SansSamurai.png");
-  image(img, width/3, height/6,width/3,height/2);
+  image(SpriteEnemy1, width/3, height/9,width/3,height/1.5f);
 }
 void PrintVidaPNJ()
 {
-  if (DañoMostrado)
+  if (DañoMostrado) 
   {
     textSize(48);
     fill(255, 0, 0);

@@ -2,6 +2,7 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer SoundTrack;
 boolean SoundisON = false;
+PImage SpriteEnemy1;
 //import gifAnimation.*;
 //Gif miGif;
 enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE }
@@ -17,6 +18,7 @@ void setup(){
   minim = new Minim(this);
   SoundTrack = minim.loadFile("SoundTrack.mp3");
   SoundTrack.setGain(-20);
+  SpriteEnemy1 = loadImage("SansSamurai.png");
   
 }
 
