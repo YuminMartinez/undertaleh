@@ -1,101 +1,178 @@
 PImage toriil;
 enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO }
 
+// Variables de estado
 boolean SecondStageActive = false;
-PositionRect positionRect;
+boolean mostrarAdvertencia = false;
+boolean mostrarAtaque = false;
+int tiempoAdvertencia = 800; // 800ms de advertencia
+int tiempoAtaque = 1500;    // 1500ms de ataque visible
+int tiempoInicioAtaque = 0;
+PositionRect posicionActual;
+
+// Variables de salto
 
 void SecondAttack() {
   SecondStageActive = true;
   gameControl = GameControl.CLICK_RATON;
 
-  // Dibujar fondo y elementos estáticos
-  image(toriil, width / 2, height / 2, 100, 100);
-
-  // Dibujar el cuadrado de ataque
+  // Dibujar cuadrado de ataque principal (blanco)
   noFill();
-  stroke(255);  // Borde blanco estilo Undertale
-  strokeWeight(3);  
-  float lado = width * 0.15f;  // Tamaño del cuadrado
+  stroke(255);
+  strokeWeight(3);
+  float lado = width * 0.15f;
   float xPos = (width / 3 + width / 2) / 2 - lado / 2 + 180;
-  float yPos = height / 2.2f; 
-  rect(xPos, yPos, lado, lado);  
+  float yPos = height / 2.2f;
+  rect(xPos, yPos, lado, lado);
 
-  // Solo limitar movimiento si NO está saltando
-  if (!estaSaltando) {
-    daruma.limitarMovimiento(xPos, yPos, xPos + lado, yPos + lado);
+  // Lógica de temporización del ataque
+  if (!mostrarAdvertencia && !mostrarAtaque) {
+    // Iniciar nuevo ataque
+    posicionActual = PositionRect.values()[(int)random(0, 4)];
+    mostrarAdvertencia = true;
+    tiempoInicioAtaque = millis();
+    
+    // Posición inicial del Daruma según el ataque
+    switch(posicionActual) {
+      case ABAJO:
+       
+  daruma.x = xPos + lado/2 - daruma.sizeX/2;
+    
+  daruma.y = yPos + lado -daruma.sizeY/2;
 
-    // Posición inicial del Daruma y zona de ataque
-    int offset = 5;
+        break;
+      case ARRIBA:
+        daruma.x =  xPos + lado/2 - daruma.sizeX/2 ;
+daruma.y = yPos - daruma.sizeY; // fuera del borde superior
+
+        break;
+      case DERECHA:
+        daruma.x =  xPos + lado - daruma.sizeX/2 ;
+daruma.y =  yPos + lado/2 - daruma.sizeY/2; // fuera del borde superior
+
+        break;
+      case IZQUIERDA:
+      daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
+daruma.y = yPos + lado/2 - daruma.sizeY/2;
+        break;
+    }
+    xOriginal = daruma.x;
+    yOriginal = daruma.y;
+  }
+
+  // Variables para posición del ataque
+  float rectX = 0, rectY = 0, rectW = 0, rectH = 0;
+  float rotation = 0;
+  int offset = 5;
+  float imgWidth = 0; 
+  float imgHeight = 0;
+
+  // Calcular posición según el lado
+  switch(posicionActual) {
+    case ABAJO:
+      rectW = lado - offset - 3;
+      rectH = lado / 3;
+      rectX = xPos + offset;
+      rectY = yPos + lado - offset - rectH;
+      rotation = 0;
+      xObjetivo = rectX + rectW/2;
+      yObjetivo = rectY + rectH + daruma.sizeY;
+      imgWidth = rectW; 
+      imgHeight = rectH;
+      break;
+      
+    case ARRIBA:
+      rectW = lado - 2 * offset;
+      rectH = lado / 3;
+      rectX = xPos + offset;
+      rectY = yPos + offset;
+      rotation = PI;
+      xObjetivo = rectX + rectW/2;
+      yObjetivo = rectY - daruma.sizeY;
+      imgWidth = rectW; 
+      imgHeight = rectH;
+      break;
+      
+    case DERECHA:
+      rectW = lado / 3;
+      rectH = lado - 2 * offset;
+      rectX = xPos + lado - rectW - offset;
+      rectY = yPos + offset;
+      rotation = -HALF_PI;
+      xObjetivo = rectX + rectW + daruma.sizeX/2;
+      yObjetivo = rectY + rectH/2;
+      imgWidth = rectH; 
+      imgHeight = rectW;
+      break;
+      
+    case IZQUIERDA:
+      rectW = lado / 3;
+      rectH = lado - 2 * offset;
+      rectX = xPos + offset;
+      rectY = yPos + offset;
+      rotation = HALF_PI;
+      xObjetivo = rectX - daruma.sizeX/2;
+      yObjetivo = rectY + rectH/2;
+      imgWidth = rectH; 
+      imgHeight = rectW;
+      break;
+  }
+
+  // Mostrar advertencia (rectángulo rojo)
+  if (mostrarAdvertencia) {
     noFill();
-    stroke(255, 0, 0, 150); // Rojo semitransparente
-    strokeWeight(3);  
-    
-    
-    
-    float RectSide = random(1, 5);  // Solo valores 1, 2, 3 o 4
+    stroke(255, 0, 0, 150);
+    strokeWeight(3);
+    rect(rectX, rectY, rectW, rectH);
 
-    // Convertimos el float a int para usar en el switch
-    int side = int(RectSide);
+    // Transición al ataque real después del tiempo de advertencia
+    if (millis() - tiempoInicioAtaque > tiempoAdvertencia) {
+      mostrarAdvertencia = false;
+      mostrarAtaque = true;
+      tiempoInicioAtaque = millis();
+    }
+  }
 
-    switch (side) {
-      case 1:
-        // Rectángulo inferior
-        rect(xPos + offset, yPos + lado - offset - lado / 3, lado - offset - 3, lado / 3);
-        daruma.x = xPos + lado / 2 - daruma.sizeX / 2;  
-        daruma.y = yPos + lado - daruma.sizeY / 2 - 18;
-        positionRect = PositionRect.ABAJO;
-        break;
+  // Mostrar ataque real (Torii)
+  if (mostrarAtaque) {
+    pushMatrix();
+    translate(rectX + rectW/2, rectY + rectH/2);
+    rotate(rotation);
+    imageMode(CENTER);
+    image(toriil, 0, 0, imgWidth, imgHeight);
+    popMatrix();
+    imageMode(CORNER);
 
-      case 2:
-        // Rectángulo superior 
-        rect(xPos + offset, yPos + offset, lado - 2 * offset, lado / 3);
-        daruma.x = xPos + lado / 2 - daruma.sizeX / 2;
-        daruma.y = yPos - daruma.sizeY; // Fuera del borde superior
-        positionRect = PositionRect.ARRIBA;
-        break;
-
-      case 3:
-        // Rectángulo derecho 
-        rect(xPos + lado - lado / 3 - offset, yPos + offset, lado / 3, lado - 2 * offset);
-        daruma.x = xPos + lado - daruma.sizeX / 2;
-        daruma.y = yPos + lado / 2 - daruma.sizeY / 2;
-        positionRect = PositionRect.DERECHA;
-        break;
-
-      case 4:
-        // Rectángulo izquierdo
-        rect(xPos + offset, yPos + offset, lado/3, lado - 2*offset);
-        daruma.x = xPos - daruma.sizeX;  // Fuera del borde izquierdo (o xPos para pegarlo al borde)
-        daruma.y = yPos + lado/2 - daruma.sizeY/2;  // Centrado 
-        positionRect = PositionRect.IZQUIERDA ;
-
-        break;
+    // Finalizar ataque después del tiempo establecido
+    if (millis() - tiempoInicioAtaque > tiempoAtaque) {
+      mostrarAtaque = false;
     }
   }
 
   // Lógica del salto
   if (estaSaltando) {
-    if (!volviendo) {
-      // Movimiento hacia el objetivo
-      daruma.x = intlineal(daruma.x, xObjetivo, 0.2);
-      daruma.y = intlineal(daruma.y, yObjetivo, 0.2);
-
-      if (dist(daruma.x, daruma.y, xObjetivo, yObjetivo) < 1) {
-        volviendo = true;
-      }
-    } else {
-      // Movimiento de vuelta
-      daruma.x = intlineal(daruma.x, xOriginal, 0.2);
-      daruma.y = intlineal(daruma.y, yOriginal, 0.2);
-
-      if (dist(daruma.x, daruma.y, xOriginal, yOriginal) < 1) {
-        estaSaltando = false;
-        volviendo = false;
-      }
-    }
+    manejarSalto();
   }
 
   // Dibujar el Daruma
   daruma.display();
-  println("Posición Daruma - X:", daruma.x, "Y:", daruma.y, "Saltando:", estaSaltando);
+}
+
+void manejarSalto() {
+  if (!volviendo) {
+    daruma.x = lerp(daruma.x, xObjetivo, 0.1);
+    daruma.y = lerp(daruma.y, yObjetivo, 0.1);
+
+    if (dist(daruma.x, daruma.y, xObjetivo, yObjetivo) < 5) {
+      volviendo = true;
+    }
+  } else {
+    daruma.x = lerp(daruma.x, xOriginal, 0.1);
+    daruma.y = lerp(daruma.y, yOriginal, 0.1);
+
+    if (dist(daruma.x, daruma.y, xOriginal, yOriginal) < 5) {
+      estaSaltando = false;
+      volviendo = false;
+    }
+  }
 }

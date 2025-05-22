@@ -17,7 +17,7 @@ void mousePressed() {
     yOriginal = daruma.y;
     float distanciaSalto = 150;  // Ajusta según necesidad
 
-    switch (positionRect) {
+    switch (posicionActual) {
       case IZQUIERDA:
         xObjetivo = daruma.x + distanciaSalto;
         yObjetivo = daruma.y;
