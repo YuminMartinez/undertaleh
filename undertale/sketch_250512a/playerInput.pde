@@ -6,10 +6,13 @@ float xObjetivo, yObjetivo;
 
 float velocidad = 5;  // velocidad de salto (ajustable)
 
+
+
+
 void mousePressed() {
   if(SecondStageActive == true)
 {
-  if (!estaSaltando) {
+  if (!estaSaltando ) {
     gameControl = GameControl.CLICK_RATON; // Fuerza el modo CLICK_RATON
     estaSaltando = true;
     volviendo = false;

@@ -6,7 +6,7 @@ boolean SecondStageActive = false;
 boolean mostrarAdvertencia = false;
 boolean mostrarAtaque = false;
 int tiempoAdvertencia =500; // 800ms de advertencia
-int tiempoAtaque = 2000;    // 1500ms de ataque visible
+int tiempoAtaque = 500;    // 1500ms de ataque visible
 int tiempoInicioAtaque = 0;
 PositionRect posicionActual;
 boolean colisionActiva = false;
@@ -56,7 +56,7 @@ void SecondAttack() {
     }
     xOriginal = daruma.x;
     yOriginal = daruma.y;
-    xObjetivo = centroX; // El salto va al centro
+    xObjetivo = centroX; 
     yObjetivo = centroY;
   }
 
@@ -155,7 +155,7 @@ void SecondAttack() {
         // ¡Colisión detectada!
         println("¡Colisión con el Torii!");
         colisionActiva = false; // Evitar múltiples detecciones
-        mostrarAtaque = false;  // Terminar el ataque
+       
         PJLife--;
         
      
