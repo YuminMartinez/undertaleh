@@ -3,13 +3,15 @@
 import ddf.minim.*;
 Minim minim;
 AudioPlayer SoundTrack;
+AudioPlayer GameOver;
+AudioPlayer HeartBreak;
 boolean SoundisON = false;
 PImage SpriteEnemy1;
 //import gifAnimation.*;
 //Gif miGif;
 int timeTransition = 0;
 //VARIABLES GLOBALES
-enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,PNJ_ATTACK ,SECOND_SANSATTACK }
+enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,PNJ_ATTACK ,SECOND_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
 GameState gameState = GameState.FIRST_STAGE;
 
 enum GameControl { RATON, CLICK_RATON }
@@ -24,7 +26,7 @@ void setup(){
   frameRate(30);
   background(0); 
   barraAtaque = width/6;
-    
+    posY_Dead = height/2;
     darumaImg = loadImage("daruma.png"); 
     DarumaFeito = RecibeDaño(darumaImg);
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
@@ -33,12 +35,14 @@ void setup(){
   katanas_iniciar();
    inicializarSakurasShurikenFase();
     toriil = loadImage("toriil.png");
-   
+     GameOverScreen = loadImage("GameOverScreen.png"); 
 
   pXrojo = width/6;
   disRojo = width/1.5f;
   minim = new Minim(this);
   SoundTrack = minim.loadFile("SoundTrack.mp3");
+  HeartBreak = minim.loadFile("DeathSound.mp3");
+  HeartBreak.setGain(-20);
   SoundTrack.setGain(-20);
   SpriteEnemy1 = loadImage("SansSamurai.png");
   
@@ -72,21 +76,27 @@ void draw()
       SoundisON = true;
      
     }
-     ActionsPlayer();
-       
+     ActionsPlayer(); 
     break;
     
     case PNJ_ATTACK:
-     PrintEnemy();
-    secondStage();
-    PrintVidaPNJ();
-    DodgeAttack();
-    if(millis() - timeAttack > 10000)
-    {
-        gameState = GameState.SECOND_STAGE;
-        ResetAtt3();
-        MenuBattle = true;
-    }
+       PrintEnemy();
+      secondStage();
+      PrintVidaPNJ();
+      DodgeAttack();
+      if(millis() - timeAttack > 10000)
+      {
+          gameState = GameState.SECOND_STAGE;
+          ResetAtt3();
+          MenuBattle = true;
+      }
+      break;
+    case ENEMY_DEFEAT:
+      GoodEnding();
+      break;
+    case PLAYER_DEFEAT:
+     PlayerDefeat();
+      break;
    // attackone();
       
   }
@@ -95,11 +105,17 @@ void draw()
  {
    PJLife = PJMaxLife;
  }
- else if(PJLife < 0)
+ else if(PJLife <= 0)
  {
-   PJLife = 0;
+    PJLife = 0;
+    MenuBattle = false;
+    ChangeToMain = false;
+   gameState = GameState.PLAYER_DEFEAT;     
  }
- 
+ if(vidaPNJ <=0)
+ {
+   gameState = GameState.ENEMY_DEFEAT;
+ }
   if(ChangeToMain)
       {
         if(millis() - timeTransition > 1000)

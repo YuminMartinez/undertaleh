@@ -49,3 +49,42 @@ void ActionsPlayer()
        }
 
 }
+boolean SoundGame = false;
+boolean EndSound = false;
+float posY_Dead = 0;
+PImage GameOverScreen;
+int aparicion =0;
+
+void PlayerDefeat()
+{
+  
+   //image
+   SoundTrack.pause();
+   HeartBreak.play();   
+   image(img,width/2,posY_Dead,width/21.33f,height/13.5f);
+   posY_Dead += height/100;
+   if(posY_Dead >= height)
+   {
+     posY_Dead = height;
+   }
+   if(posY_Dead == height)
+   {
+     tint(255,aparicion);
+     image(GameOverScreen,width/4,height/4, width /2, height/2);
+     textAlign(LEFT, LEFT);
+     textSize(48);
+     fill(255);
+    text("You have died, but your determination prevents you from losing, face it again, you can" ,width/20,height/1.1f);
+     if(aparicion >= 255)
+     {
+        aparicion = 255; 
+     }
+     else
+     {
+       aparicion += 5;
+     }
+   }
+   
+   
+  
+}

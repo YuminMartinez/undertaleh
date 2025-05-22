@@ -43,3 +43,8 @@ void PNJRecibirDaño(int dmg)
   DañoMostrado = true;
   tiempoDañoMostrado = millis();
 }
+
+void GoodEnding()
+{
+  
+}
