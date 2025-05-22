@@ -14,8 +14,7 @@ enum GameControl { RATON, CLICK_RATON }
 
 GameControl gameControl = GameControl.RATON;
 
-
-
+int nivel = 1;
   
 void setup(){
   size(1920, 1080); 
@@ -79,8 +78,17 @@ void draw()
     secondStage();
     PrintVidaPNJ();
     attackone();
+      break;
+      
+      case SECOND_SANSATTACK:
+      PrintEnemy();
+       PrintVidaPNJ();
+       SecondAttack();
+      break;
+      
       
   }
+ 
   
  if(PJLife > PJMaxLife)
  {
@@ -93,11 +101,20 @@ void draw()
  
   if(ChangeToMain)
       {
-        if(millis() - timeTransition > 1000)
+        if(millis() - timeTransition > 1000 && nivel == 1)
         {
         ChangeToMain = false;
          //MenuBattle = true;
        gameState = GameState.PNJ_ATTACK;
+       nivel++;
         }
+          if(millis() - timeTransition > 1000 && nivel == 2)
+        {
+        ChangeToMain = false;
+         //MenuBattle = true;
+       gameState = GameState.SECOND_SANSATTACK;
+       nivel++;
+        }
+        
       }  
 }

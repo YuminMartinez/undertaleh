@@ -25,7 +25,7 @@ void attackone() {
 
   stroke(255);  // Borde blanco estilo Undertale
   strokeWeight(3);  // Más grueso para que se vea épico
-  fill(0);
+  noFill();
   // Tamaño del cuadrado 
   float lado = width * 0.15f;  // 15% del ancho de pantalla (más proporcional) 
 
@@ -198,7 +198,8 @@ void verificarColisiones() {
             if (bolaShurikenActual >= bolasShuriken.length) {
                 todasSakurasShurikenRecolectadas = true;
                 println("¡Todas las sakuras de shurikens recolectadas!");
-                
+                gameState = GameState.SECOND_STAGE;
+                 MenuBattle = true;
 
             } else {
                 bolasShuriken[bolaShurikenActual].visible = true;
