@@ -1,6 +1,7 @@
 // Variables globales para la transición
 float transitionX = 0;
 PImage img;
+
 void secondStageTransition() {
   // Dibujar firstStage primero como fondo
   firstStage(); 
@@ -31,9 +32,11 @@ boolean ActMode = false;
 boolean AtaqueRealizado = false;
 int PJMaxLife = 99;
 int PJLife = PJMaxLife;
+int LastPJLife = PJLife;
 int barraAtaque;
 float pXrojo = width/6;
 float disRojo = width/1.5f;
+
 void secondStage()
 { 
   if(actionSelected == false && ActMode == false)

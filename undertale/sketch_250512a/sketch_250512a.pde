@@ -1,3 +1,5 @@
+
+
 import ddf.minim.*;
 Minim minim;
 AudioPlayer SoundTrack;
@@ -14,7 +16,7 @@ enum GameControl { RATON, CLICK_RATON }
 
 GameControl gameControl = GameControl.RATON;
 
-
+int faseSansAtaque = 0;
 
   
 void setup(){
@@ -24,6 +26,7 @@ void setup(){
   barraAtaque = width/6;
     
     darumaImg = loadImage("daruma.png"); 
+    DarumaFeito = RecibeDaño(darumaImg);
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
     // Carga las imágenes (¡asegúrate de tener los archivos en /data/!)
   inicializarCurvasShuriken();
@@ -58,7 +61,6 @@ void draw()
       firstStage();
       break;
       
-         
     case TRANSITION:
     secondStageTransition();
     break;
@@ -78,7 +80,14 @@ void draw()
      PrintEnemy();
     secondStage();
     PrintVidaPNJ();
-    attackone();
+    DodgeAttack();
+    if(millis() - timeAttack > 10000)
+    {
+        gameState = GameState.SECOND_STAGE;
+        ResetAtt3();
+        MenuBattle = true;
+    }
+   // attackone();
       
   }
   
@@ -96,6 +105,7 @@ void draw()
         if(millis() - timeTransition > 1000)
         {
         ChangeToMain = false;
+        faseSansAtaque = 3;
          //MenuBattle = true;
        gameState = GameState.PNJ_ATTACK;
         }

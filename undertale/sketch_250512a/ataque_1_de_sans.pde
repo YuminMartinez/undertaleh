@@ -1,5 +1,6 @@
 //variables
 PImage darumaImg;
+PImage DarumaFeito;
 Daruma daruma;
  PImage katana;
 
@@ -20,7 +21,7 @@ void attackone() {
   
   
   //CUADRADO
-   gameControl = GameControl.RATON;
+  gameControl = GameControl.RATON;
   moveAttackOne = true;
 
   stroke(255);  // Borde blanco estilo Undertale

@@ -244,5 +244,25 @@ void keyPressed()
 
     }
    
-   
+   if(faseSansAtaque == 3)
+   {
+     if(keyCode == DOWN)
+     {
+       PlayerDodge++;
+       if(PlayerDodge >1)
+       {
+         PlayerDodge = 1;
+       }
+     }
+     if(keyCode == UP)
+     {
+       PlayerDodge--;
+       if(PlayerDodge < -1)
+       {
+         PlayerDodge = -1;
+       }
+     }
+      
+     
+   }
 }
