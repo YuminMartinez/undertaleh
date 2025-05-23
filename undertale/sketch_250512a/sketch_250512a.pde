@@ -1,5 +1,3 @@
-
-
 import ddf.minim.*;
 Minim minim;
 AudioPlayer SoundTrack;
@@ -12,7 +10,7 @@ PImage SansInicio;
 //Gif miGif;
 int timeTransition = 0;
 //VARIABLES GLOBALES
-enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,PNJ_ATTACK ,SECOND_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
+enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,FIRST_SANSATTACK ,SECOND_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
 GameState gameState = GameState.FIRST_STAGE;
 
 enum GameControl { RATON, CLICK_RATON }
@@ -82,7 +80,7 @@ void draw()
      ActionsPlayer(); 
     break;
     
-    case PNJ_ATTACK:
+    case  SECOND_STAGE:
        PrintEnemy();
       secondStage();
       PrintVidaPNJ();
@@ -94,18 +92,20 @@ void draw()
           MenuBattle = true;
       }
       break;
+      
+    case FIRST_SANSATTACK:
+    attackone();
+     PrintEnemy();
+     PrintVidaPNJ();
+    break;
     case ENEMY_DEFEAT:
       GoodEnding();
       break;
     case PLAYER_DEFEAT:
      PlayerDefeat();
       break;
-   // attackone();
-     PrintEnemy();
-    secondStage();
-    PrintVidaPNJ();
-    attackone();
-      break;
+ 
+  
       
       case SECOND_SANSATTACK:
       PrintEnemy();
@@ -139,7 +139,7 @@ void draw()
         ChangeToMain = false;
         faseSansAtaque = 3;
          //MenuBattle = true;
-       gameState = GameState.PNJ_ATTACK;
+       gameState = GameState.SECOND_STAGE;
        nivel++;
         }
           if(millis() - timeTransition > 1000 && nivel == 2)
