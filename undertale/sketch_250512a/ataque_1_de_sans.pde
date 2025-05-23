@@ -12,16 +12,10 @@ boolean bezzerSuperado = false;
 
 void refreshAttackOne()
 {
-     inicializarCurvasShuriken();
-    katanas_iniciar();
-    inicializarSakurasShurikenFase();
-    
-    bezzerSuperado = false;
-    juegoActivo = true;
-   moveAttackOne = false ;
-    bolaActual = 0; 
-    
-
+    inicializarCurvasShuriken();
+            katanas_iniciar();
+           inicializarSakurasShurikenFase();
+           bezzerSuperado = false;
 }
 
 
@@ -33,7 +27,7 @@ void attackone() {
   
   
   //CUADRADO
-  
+  gameControl = GameControl.RATON;
   moveAttackOne = true;
 
   stroke(255);  // Borde blanco estilo Undertale
@@ -49,21 +43,7 @@ void attackone() {
   rect(xPos, yPos, lado, lado);  
   
     daruma.limitarMovimiento(xPos, yPos, xPos +lado, yPos + lado); 
-    
-    
-    if (CanMove == false)
-    {
-      daruma.x =   (xPos +lado/2)- 20;
-      daruma.y = yPos +lado/2;
-      daruma.display();
-    }
-    else
-    {
-      daruma.display();
-    }
-  
-     
-  
+  daruma.display();
   
   if (bezzerSuperado == false){
   curvaKatana.curva_de_katanas();

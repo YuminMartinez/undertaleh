@@ -3,6 +3,7 @@ Minim minim;
 AudioPlayer SoundTrack;
 AudioPlayer GameOver;
 AudioPlayer HeartBreak;
+AudioPlayer BebeCeniza;
 boolean SoundisON = false;
 PImage SpriteEnemy1;
 PImage SansInicio;
@@ -15,14 +16,14 @@ GameState gameState = GameState.FIRST_STAGE;
 boolean TrAttack = false;
 enum GameControl { RATON, CLICK_RATON }
 
-GameControl gameControl = GameControl.CLICK_RATON;
+GameControl gameControl = GameControl.RATON;
 
 
 
 int nivel = 2;
   
 void setup(){
-  
+  SansDefeated = loadImage("SansDefeat.png");
   EnemyShuriken = loadImage("NinjaSans.png"); 
   size(1920, 1080); 
   frameRate(30);
@@ -44,8 +45,10 @@ void setup(){
   minim = new Minim(this);
   SoundTrack = minim.loadFile("SoundTrack.mp3");
   HeartBreak = minim.loadFile("DeathSound.mp3");
+  BebeCeniza = minim.loadFile("BebeCeniza.mp3");
   HeartBreak.setGain(-20);
   SoundTrack.setGain(-20);
+  BebeCeniza.setGain(-20);
   SpriteEnemy1 = loadImage("SansSamurai.png");
   
 }
@@ -55,7 +58,7 @@ void draw()
   frameRate(30);
   background(0);
       
-  if (CanMove == true) {
+  if (gameControl == GameControl.RATON) {
     daruma.x = mouseX - daruma.sizeX / 2;
     daruma.y = mouseY - daruma.sizeY / 2;
   }
@@ -82,17 +85,15 @@ void draw()
     break;
     
     case FIRST_SANSATTACK:
-
-
-     attackone();
      PrintEnemy();
      PrintVidaPNJ();
      secondStage();
      attackone();
+     
+   
     break;
      
     case SECOND_SANSATTACK:
-      CanMove = false;
      PrintEnemy();
      PrintVidaPNJ();
      secondStage();
@@ -106,12 +107,7 @@ void draw()
     break;
     
     case  THIRD_SANSATTACK:
-       PrintEnemy();
-
-     
-     
       PrintEnemy();
-
       secondStage();
       PrintVidaPNJ();
       DodgeAttack();
@@ -145,6 +141,8 @@ void draw()
  if(vidaPNJ <=0)
  {
    gameState = GameState.ENEMY_DEFEAT;
+    MenuBattle = false;
+    ChangeToMain = false;
  }
   if(ChangeToMain)
       {
@@ -152,7 +150,7 @@ void draw()
         {
             nivel = 1;
             TrAttack = false;
-            
+            refreshAttackOne();
         }
          if(millis() - timeTransition > 1000 && nivel == 3)
         {
@@ -169,6 +167,7 @@ void draw()
          //MenuBattle = true;
        gameState = GameState.SECOND_SANSATTACK;
        TrAttack = false;
+      
        nivel++;
         }
         if(millis() - timeTransition > 1000 && nivel == 1)
@@ -177,7 +176,6 @@ void draw()
         TrAttack = false;
          //MenuBattle = true;
        gameState = GameState.FIRST_SANSATTACK;
-         refreshAttackOne();
        nivel++;
         }
          

@@ -55,7 +55,7 @@ float posY_Dead = 0;
 float posX_Dead = 0;
 PImage GameOverScreen;
 int aparicion =0;
-
+float escalado = 30;
 
 void PlayerDefeat()
 {
@@ -65,6 +65,7 @@ void PlayerDefeat()
    
    image(img,posX_Dead,posY_Dead,width/21.33f,height/13.5f);
    posY_Dead += height/100;
+       
   // posY_Dead = scale(height/100);
    if(posY_Dead >= height)
    {
@@ -73,7 +74,11 @@ void PlayerDefeat()
    if(posY_Dead == height)
    {
      tint(255,aparicion);
-     image(GameOverScreen,width/4,height/4, width /2, height/2);
+     pushMatrix(); 
+      translate(width/4, height/4);  
+      scale(escalado);  
+      image(GameOverScreen, 0, 0, width/64, height/64);  
+      popMatrix(); 
      textAlign(LEFT, LEFT);
      textSize(48);
      fill(255);

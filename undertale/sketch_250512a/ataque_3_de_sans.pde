@@ -100,7 +100,7 @@ void DodgeAttack()
       PJLife--;
       
     }
-    DodgePosX[i] += 7.5f;
+    DodgePosX[i] += 15;
     //if(DisplayDodge[i])
     if(DodgePosX[i] >=xPos+lado)
     {

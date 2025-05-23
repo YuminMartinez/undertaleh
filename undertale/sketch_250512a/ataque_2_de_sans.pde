@@ -158,7 +158,7 @@ void SecondAttack()
   }
   
   
-   if (colisionActiva && !estaSaltando ) {
+   if (colisionActiva) {
       // Calculamos las coordenadas reales del Torii (sin rotación para simplificar)
       float toriiX = rectX;
       float toriiY = rectY;
@@ -184,7 +184,7 @@ void SecondAttack()
   }
 
   // Dibujar el Daruma
-  daruma.displayR();
+  daruma.display();
 }
 float velocidadSalto = 0.3f;
 void manejarSalto() {
