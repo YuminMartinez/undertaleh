@@ -15,7 +15,7 @@ class curva {
   } 
 
 
-  
+
   boolean colisionaConDaruma(Daruma daruma) {
   float paso = 0.05;
 

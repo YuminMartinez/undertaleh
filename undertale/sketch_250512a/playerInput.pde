@@ -6,18 +6,21 @@ float xObjetivo, yObjetivo;
 
 float velocidad = 5;  // velocidad de salto (ajustable)
 
+
+
+
 void mousePressed() {
   if(SecondStageActive == true)
 {
-  if (!estaSaltando) {
+  if (!estaSaltando ) {
     gameControl = GameControl.CLICK_RATON; // Fuerza el modo CLICK_RATON
     estaSaltando = true;
     volviendo = false;
     xOriginal = daruma.x;
     yOriginal = daruma.y;
-    float distanciaSalto = 150;  // Ajusta según necesidad
+    float distanciaSalto = 200;  // Ajusta según necesidad
 
-    switch (positionRect) {
+    switch (posicionActual) {
       case IZQUIERDA:
         xObjetivo = daruma.x + distanciaSalto;
         yObjetivo = daruma.y;
