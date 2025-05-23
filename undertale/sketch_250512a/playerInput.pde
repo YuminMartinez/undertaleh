@@ -43,37 +43,42 @@ void keyPressed()
     // Determina la dirección según la tecla de flecha
     if (keyCode == LEFT && posicionActual == PositionRect.DERECHA) 
     {
-      saltarEnDireccion(daruma.x - distanciaSalto, daruma.y);  // Salto izquierda
+      saltarEnDireccion(daruma.x - distanciaSalto, daruma.y);  
     }
     else if (keyCode == RIGHT && posicionActual == PositionRect.IZQUIERDA) 
     {
-      saltarEnDireccion(daruma.x + distanciaSalto, daruma.y);  // Salto derecha
+      saltarEnDireccion(daruma.x + distanciaSalto, daruma.y); 
     } 
     else if (keyCode == UP && posicionActual == PositionRect.ABAJO) 
     {
-      saltarEnDireccion(daruma.x, daruma.y - distanciaSalto);  // Salto arriba
+      saltarEnDireccion(daruma.x, daruma.y - distanciaSalto); 
     } 
     else if (keyCode == DOWN && posicionActual == PositionRect.ARRIBA) 
     {
-      saltarEnDireccion(daruma.x, daruma.y + distanciaSalto);  // Salto abajo
+      saltarEnDireccion(daruma.x, daruma.y + distanciaSalto);  
     }
   }
 // Con Q restas 1 de vida al jugador, con E sumas 1
-  if (keyCode == 'Q') {
+  if (keyCode == 'Q')
+  {
     PJLife--;
   }
-  if (keyCode == 'E') {
+  if (keyCode == 'E') 
+  {
     PJLife++;
   }
   // Si  se le da al ESPACIO, pasaremos a la transicion
-  if (key == ' ' || keyCode == 32) {
-    if (gameState == GameState.FIRST_STAGE) {
+  if (key == ' ' || keyCode == 32)
+  {
+    if (gameState == GameState.FIRST_STAGE)
+    {
       gameState = GameState.TRANSITION;
       transitionX = 0;
     }
   }
   // Con la P se mostrarán las curvas de Interpolacion
-  if (keyCode == 'P') {
+  if (keyCode == 'P')
+  {
     verCurvaInter = !verCurvaInter;
   }
   if(gameState == GameState.ENEMY_DEFEAT)
@@ -85,8 +90,10 @@ void keyPressed()
     }
   }
   // Con ENTER se van pasando los textos del MERCY
-  if (ReallyMercy) {
-    if (keyCode == ENTER && Mercytext2) {
+  if (ReallyMercy)
+  {
+    if (keyCode == ENTER && Mercytext2)
+    {
       CharNext = 0;
       ended = false;
       Mercytext2 = false;
@@ -94,7 +101,8 @@ void keyPressed()
       ChangeToMain = true;
       timeTransition = millis();
     }
-    if (keyCode == ENTER && Mercytext1) {
+    if (keyCode == ENTER && Mercytext1) 
+    {
       Mercytext1 = false;
       CharNext = 0;
       ended = false;
@@ -102,8 +110,10 @@ void keyPressed()
     }
   }
 
-  if (EatFood) {
-    if (keyCode == ENTER) {
+  if (EatFood)
+  {
+    if (keyCode == ENTER)
+    {
       EatFood = false;
       Eated = false;
       ChangeToMain = true;
@@ -113,25 +123,31 @@ void keyPressed()
     }
   }
  // Si se le da al ENTER, comerá el objeto, sino volverá al menu con el SHIFT
-  if (lunchTime) {
-    if (keyCode == ENTER) {
+  if (lunchTime)
+  {
+    if (keyCode == ENTER) 
+    {
       lunchTime = false;
       EatFood = true;
     }
-    if (keyCode == SHIFT) {
+    if (keyCode == SHIFT) 
+    {
       lunchTime = false;
       MenuBattle = true;
     }
   }
   // SI se le da a ENTER, entrará a buscar un objeto por la sala
-  if (FindObject) {
-    if (keyCode == ENTER) {
+  if (FindObject)
+  {
+    if (keyCode == ENTER) 
+    {
       FindObject = false;
       ChangeToMain = true;
       ended = false;
       firstSearch = false;
       CharNext = 0;
-      if (possibility == 4) {
+      if (possibility == 4)
+      {
         WeaponFinded = true;
       }
       timeTransition = millis();
@@ -139,7 +155,8 @@ void keyPressed()
   }
   // Presionando enter, pasará los textos uno por uno
   if (CheckEnemy) {
-    if (keyCode == ENTER && Checktext2) {
+    if (keyCode == ENTER && Checktext2)
+    {
       Checktext2 = false;
       CheckEnemy = false;
       ChangeToMain = true;
@@ -147,7 +164,8 @@ void keyPressed()
       CharNext = 0;
       timeTransition = millis();
     }
-    if (keyCode == ENTER && Checktext1) {
+    if (keyCode == ENTER && Checktext1)
+    {
       Checktext1 = false;
       Checktext2 = true;
       ended = false;
@@ -156,22 +174,27 @@ void keyPressed()
   }
   // Si esta en ACtMode, y se presiona SHIFT, volverá al Menú, si presiona ENTER, entrará a las opciones del botón ACT
   if (ActMode) {
-    if (keyCode == SHIFT) {
+    if (keyCode == SHIFT)
+    {
       ActMode = false;
       MenuBattle = true;
     }
-    if (keyCode == UP) {
+    if (keyCode == UP)
+    {
       ActSelection--;
       if (ActSelection < 0)
         ActSelection = 0;
     }
-    if (keyCode == DOWN) {
+    if (keyCode == DOWN) 
+    {
       ActSelection++;
       if (ActSelection > 1)
         ActSelection = 1;
     }
-    if (keyCode == ENTER) {
-      switch (ActSelection) {
+    if (keyCode == ENTER) 
+    {
+      switch (ActSelection)
+      {
         case 0:
           ActMode = false;
           CheckEnemy = true;
@@ -186,37 +209,44 @@ void keyPressed()
   }
 // Si esta en atackMode y presiona ENTER, la barra se parará y se realizará el ataque
   if (atackMode) {
-    if (keyCode == ENTER) {
+    if (keyCode == ENTER)
+    {
       atackMode = false;
       AtaqueRealizado = true;
     }
   }
  // Si el jugador presiona ENTER entrará al boton de attack y si le da al SHIFT saldrá
   if (actionSelected) {
-    if (keyCode == SHIFT) {
+    if (keyCode == SHIFT) 
+    {
       actionSelected = false;
       MenuBattle = true;
     }
-    if (keyCode == ENTER) {
+    if (keyCode == ENTER) 
+    {
       actionSelected = false;
       atackMode = true;
     }
   }
   // Si el jugador presiona la tecla IZQUIERDA, se moverá hacia el boton izquierdo del menu y vicebersa
   if (MenuBattle) {
-    if (keyCode == LEFT) {
+    if (keyCode == LEFT) 
+    {
       player_choose--;
       if (player_choose < 0)
         player_choose = 0;
     }
-    if (keyCode == RIGHT) {
+    if (keyCode == RIGHT) 
+    {
       player_choose++;
       if (player_choose > 3)
         player_choose = 3;
     }
     // Pasa de fase dependiendo de la seleccion de los 4 botones del Player
-    if (keyCode == ENTER) {
-      switch (player_choose) {
+    if (keyCode == ENTER)
+    {
+      switch (player_choose)
+      {
         case 0:
           MenuBattle = false;
           actionSelected = true;
@@ -239,13 +269,15 @@ void keyPressed()
   }
   // Si el jugador presiona la tecla ARRIBA, se moverá arriba y vicebersa
   if (TrAttack) {
-    if (keyCode == DOWN) {
+    if (keyCode == DOWN) 
+    {
       PlayerDodge++;
       if (PlayerDodge > 1) {
         PlayerDodge = 1;
       }
     }
-    if (keyCode == UP) {
+    if (keyCode == UP) 
+    {
       PlayerDodge--;
       if (PlayerDodge < -1) {
         PlayerDodge = -1;
