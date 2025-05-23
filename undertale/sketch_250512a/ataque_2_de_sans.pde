@@ -10,8 +10,17 @@ int tiempoAtaque = 500;    // 1500ms de ataque visible
 int tiempoInicioAtaque = 0;
 PositionRect posicionActual;
 boolean colisionActiva = false;
+int Duration2ndAttack = 0;
+boolean SndFirstTime = true;
 
-void SecondAttack() {
+
+void SecondAttack() 
+{
+  if(SndFirstTime)
+  {
+    Duration2ndAttack = millis();
+    SndFirstTime = false;
+  }
   SecondStageActive = true;
   gameControl = GameControl.CLICK_RATON;
 
@@ -218,4 +227,9 @@ boolean colisionDarumaTorii(float toriiX, float toriiY, float toriiW, float tori
            darumaLeft < toriiRight && 
            darumaBottom > toriiTop && 
            darumaTop < toriiBottom;
+}
+
+void Reset2ndRound()
+{
+  SndFirstTime = true;
 }

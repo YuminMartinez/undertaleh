@@ -247,7 +247,7 @@ void keyPressed()
 
     }
    
-   if(nivel == 3)
+   if(TrAttack == true)
    {
      if(keyCode == DOWN)
      {

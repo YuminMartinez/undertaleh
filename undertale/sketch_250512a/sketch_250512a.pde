@@ -12,17 +12,16 @@ int timeTransition = 0;
 //VARIABLES GLOBALES
 enum GameState { FIRST_STAGE,TRANSITION, MENU,FIRST_SANSATTACK ,SECOND_SANSATTACK,THIRD_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
 GameState gameState = GameState.FIRST_STAGE;
-
+boolean TrAttack = false;
 enum GameControl { RATON, CLICK_RATON }
 
 GameControl gameControl = GameControl.RATON;
 
 
 
-int nivel;
+int nivel = 1;
   
 void setup(){
-  nivel= 1;
   size(1920, 1080); 
   frameRate(30);
   background(0); 
@@ -32,7 +31,7 @@ void setup(){
     darumaImg = loadImage("daruma.png"); 
     DarumaFeito = RecibeDaño(darumaImg);
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
-    // Carga las imágenes (¡asegúrate de tener los archivos en /data/!)
+    // Carga las imágenes 
   inicializarCurvasShuriken();
   katanas_iniciar();
    inicializarSakurasShurikenFase();
@@ -82,9 +81,40 @@ void draw()
     break;
     
     case FIRST_SANSATTACK:
+<<<<<<< Updated upstream
      
      
       PrintEnemy();
+=======
+<<<<<<< HEAD
+     attackone();
+     PrintEnemy();
+     PrintVidaPNJ();
+     secondStage();
+     attackone();
+    break;
+     
+    case SECOND_SANSATTACK:
+     PrintEnemy();
+     PrintVidaPNJ();
+     secondStage();
+     SecondAttack();
+     if(millis() - Duration2ndAttack > 10000)
+      {
+          gameState = GameState.MENU;
+          Reset2ndRound();
+          MenuBattle = true;
+      }
+    break;
+    
+    case  THIRD_SANSATTACK:
+       PrintEnemy();
+=======
+     
+     
+      PrintEnemy();
+>>>>>>> origin/fetures/3rAtaque
+>>>>>>> Stashed changes
       secondStage();
       PrintVidaPNJ();
       DodgeAttack();
@@ -135,32 +165,37 @@ void draw()
  }
   if(ChangeToMain)
       {
-        if(millis() - timeTransition > 1000 && nivel == 1)
+        if(nivel > 3)
         {
-        ChangeToMain = false;
-        
-         //MenuBattle = true;
-       gameState = GameState.FIRST_SANSATTACK;
-       nivel++;
+            nivel = 1;
+            TrAttack = false;
         }
-          if(millis() - timeTransition > 1000 && nivel == 2)
-        {
-        ChangeToMain = false;
-         //MenuBattle = true;
-       gameState = GameState.SECOND_SANSATTACK;
-       nivel++;
-        }
-        if(millis() - timeTransition > 1000 && nivel == 3)
+         if(millis() - timeTransition > 1000 && nivel == 3)
         {
           ChangeToMain = false;
           
          //MenuBattle = true;
          gameState = GameState.THIRD_SANSATTACK;
          nivel++;
+         TrAttack = true;
         }
-        if(nivel > 3)
+        if(millis() - timeTransition > 1000 && nivel == 2)
         {
-            nivel = 1;
+        ChangeToMain = false;
+         //MenuBattle = true;
+       gameState = GameState.SECOND_SANSATTACK;
+       TrAttack = false;
+       nivel++;
         }
+        if(millis() - timeTransition > 1000 && nivel == 1)
+        {
+        ChangeToMain = false;
+        TrAttack = false;
+         //MenuBattle = true;
+       gameState = GameState.FIRST_SANSATTACK;
+       nivel++;
+        }
+         
+        
       }  
 }
