@@ -82,19 +82,9 @@ void draw()
     break;
     
     case FIRST_SANSATTACK:
-     attackone();
-     PrintEnemy();
-     PrintVidaPNJ();
-    break;
      
-    case SECOND_SANSATTACK:
-     PrintEnemy();
-     PrintVidaPNJ();
-     SecondAttack();
-    break;
-    
-    case  THIRD_SANSATTACK:
-       PrintEnemy();
+     
+      PrintEnemy();
       secondStage();
       PrintVidaPNJ();
       DodgeAttack();
@@ -104,6 +94,20 @@ void draw()
           ResetAtt3();
           MenuBattle = true;
       }
+    break;
+     
+    case SECOND_SANSATTACK:
+     PrintEnemy();
+     PrintVidaPNJ();
+     SecondAttack();
+    break;
+    
+    case  THIRD_SANSATTACK:
+    PrintEnemy();
+     PrintVidaPNJ();
+      attackone();
+     
+     
       break;
           
     case ENEMY_DEFEAT:
