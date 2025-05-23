@@ -7,15 +7,11 @@ float xObjetivo, yObjetivo;
 float velocidad = 5;  // velocidad de salto (ajustable)
 
 boolean verCurvaInter = false;
-boolean CanMove = false;
 
-  void mousePressed() {
-  
- if( gameState == GameState.FIRST_SANSATTACK) // para evitar un missClick y se active
- {
-  CanMove = true;
-  }
-  }
+
+void mousePressed() {
+
+}
 
 void saltarEnDireccion(float xDestino, float yDestino) {
     gameControl = GameControl.CLICK_RATON;  // Fuerza el modo CLICK_RATON
@@ -28,7 +24,7 @@ void saltarEnDireccion(float xDestino, float yDestino) {
 }
 
 void keyPressed() {
-  if (SecondStageActive && !estaSaltando &&  !colisionActiva) {
+  if (SecondStageActive && !estaSaltando) {
     float distanciaSalto = 200;
 
     // Determina la dirección según la tecla de flecha

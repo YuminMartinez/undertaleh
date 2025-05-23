@@ -40,34 +40,29 @@ void SecondAttack()
   // Lógica de temporización del ataque
   if (!mostrarAdvertencia && !mostrarAtaque) {
     // Iniciar nuevo ataque
-   posicionActual = PositionRect.IZQUIERDA;
-   // posicionActual = PositionRect.values()[(int)random(0, 4)];
+    posicionActual = PositionRect.values()[(int)random(0, 4)];
     mostrarAdvertencia = true;
     tiempoInicioAtaque = millis();
     
     // Posición inicial del Daruma según el ataque
-   switch(posicionActual) {
-  case ABAJO:
-    daruma.x = xPos + lado/2 - daruma.sizeX/2;
-    daruma.y = yPos + lado - daruma.sizeY/2;
-    daruma.rotation = 0;
-    break;
-  case ARRIBA:
-    daruma.x = xPos + lado/2 - daruma.sizeX/2;
-    daruma.y = yPos - daruma.sizeY;
-    daruma.rotation = PI;
-    break;
-  case DERECHA:
-    daruma.x = xPos + lado - daruma.sizeX/2;
-    daruma.y = yPos + lado/2 - daruma.sizeY/2;
-    daruma.rotation = -HALF_PI;
-    break;
-  case IZQUIERDA:
-    daruma.x = (xPos +10) - daruma.sizeX;
-    daruma.y = yPos + lado/2 - daruma.sizeY/2;
-    daruma.rotation = HALF_PI;
-    break;
-}
+    switch(posicionActual) {
+      case ABAJO:
+        daruma.x = xPos + lado/2 - daruma.sizeX/2;
+        daruma.y = yPos + lado - daruma.sizeY/2;
+        break;
+      case ARRIBA:
+        daruma.x = xPos + lado/2 - daruma.sizeX/2;
+        daruma.y = yPos - daruma.sizeY;
+        break;
+      case DERECHA:
+        daruma.x = xPos + lado - daruma.sizeX/2;
+        daruma.y = yPos + lado/2 - daruma.sizeY/2;
+        break;
+      case IZQUIERDA:
+        daruma.x = xPos - daruma.sizeX;
+        daruma.y = yPos + lado/2 - daruma.sizeY/2;
+        break;
+    }
     xOriginal = daruma.x;
     yOriginal = daruma.y;
     xObjetivo = centroX; 
@@ -108,7 +103,7 @@ void SecondAttack()
       rectH = lado - 2 * offset;
       rectX = xPos + lado - rectW - offset;
       rectY = yPos + offset;
-      rotation = HALF_PI;
+      rotation = -HALF_PI;
       imgWidth = rectH; 
       imgHeight = rectW;
       break;
@@ -118,7 +113,7 @@ void SecondAttack()
       rectH = lado - 2 * offset;
       rectX = xPos + offset;
       rectY = yPos + offset;
-      rotation = -HALF_PI;
+      rotation = HALF_PI;
       imgWidth = rectH; 
       imgHeight = rectW;
       break;
@@ -158,7 +153,7 @@ void SecondAttack()
   }
   
   
-   if (colisionActiva && !estaSaltando ) {
+   if (colisionActiva) {
       // Calculamos las coordenadas reales del Torii (sin rotación para simplificar)
       float toriiX = rectX;
       float toriiY = rectY;
@@ -184,7 +179,7 @@ void SecondAttack()
   }
 
   // Dibujar el Daruma
-  daruma.displayR();
+  daruma.display();
 }
 float velocidadSalto = 0.3f;
 void manejarSalto() {
