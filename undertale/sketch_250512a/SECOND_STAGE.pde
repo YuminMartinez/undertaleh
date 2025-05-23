@@ -1,8 +1,21 @@
 // Variables globales para la transición
 float transitionX = 0;
 PImage img;
-
-void secondStageTransition() {
+int player_choose = 0;
+boolean ChangeToMain = false;
+boolean MenuBattle = false;
+boolean actionSelected = false;
+boolean atackMode = false;
+boolean ActMode = false;
+boolean AtaqueRealizado = false;
+int PJMaxLife = 99;
+int PJLife = PJMaxLife;
+int LastPJLife = PJLife;
+int barraAtaque;
+float pXrojo = width/6;
+float disRojo = width/1.5f;
+void secondStageTransition() 
+{
   // Dibujar firstStage primero como fondo
   firstStage(); 
 
@@ -22,25 +35,12 @@ void secondStageTransition() {
   MenuBattle = true;
    
 }
-
-int player_choose = 0;
-boolean ChangeToMain = false;
-boolean MenuBattle = false;
-boolean actionSelected = false;
-boolean atackMode = false;
-boolean ActMode = false;
-boolean AtaqueRealizado = false;
-int PJMaxLife = 99;
-int PJLife = PJMaxLife;
-int LastPJLife = PJLife;
-int barraAtaque;
-float pXrojo = width/6;
-float disRojo = width/1.5f;
-
+// Se imprime los botones de las acciones del Jugador
 void secondStage()
 { 
   if(actionSelected == false && ActMode == false)
   {
+    // Dependiendo de que opcion elija el jugador, el Daruma se moverá al botón que el Jugador ha elegido
     switch(player_choose)
     {
       case 0:

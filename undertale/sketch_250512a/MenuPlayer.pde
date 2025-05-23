@@ -1,4 +1,13 @@
+// Variables del menu del Player
+boolean SoundGame = false;
+boolean EndSound = false;
+float posY_Dead = 0;
+float posX_Dead = 0;
+PImage GameOverScreen;
+int aparicion =0;
+float escalado = 30;
 
+// Funcion de las acciones del player
 void ActionsPlayer()
 {
  PrintEnemy();
@@ -22,10 +31,12 @@ void ActionsPlayer()
          break;
       }
     }
+    // Condiciones del boton de Item
     if(EatFood)
     {
       EatFood();
     }
+    // Condiciones del boton de ACT
     if(CheckEnemy)
     {
       CheckStatsEnemy();
@@ -34,7 +45,7 @@ void ActionsPlayer()
     {
       SearchObject();
     }
-    
+    // Condiciones del boton de Attack
     if(atackMode && !actionSelected && AtaqueRealizado == false)
       {
         PrintBarraAtaque();
@@ -49,30 +60,25 @@ void ActionsPlayer()
        }
 
 }
-boolean SoundGame = false;
-boolean EndSound = false;
-float posY_Dead = 0;
-float posX_Dead = 0;
-PImage GameOverScreen;
-int aparicion =0;
-float escalado = 30;
 
+// Funcion para cuando el player pierde
 void PlayerDefeat()
 {
-   //image
+   // Paramos la musica y comenzamos la de muerte
    SoundTrack.pause();
    HeartBreak.play();   
    
    image(img,posX_Dead,posY_Dead,width/21.33f,height/13.5f);
    posY_Dead += height/100;
        
-  // posY_Dead = scale(height/100);
+    
    if(posY_Dead >= height)
    {
      posY_Dead = height;
    }
    if(posY_Dead == height)
    {
+     // Cuando el Daruma cae, aparece el texto de Game Over poco a poco
      tint(255,aparicion);
      pushMatrix(); 
       translate(width/4, height/4);  

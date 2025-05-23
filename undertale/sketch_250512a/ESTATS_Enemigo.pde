@@ -1,3 +1,4 @@
+// Variables De Sans
 int MaxvidaPNJ = 1000;
 int vidaPNJ = MaxvidaPNJ;
 int dmg = 1;
@@ -6,18 +7,33 @@ boolean DañoMostrado = false;
 int tiempoDañoMostrado = 0;
 int dañoDelJugador = 0;
 PImage EnemyShuriken;
+PImage SansDefeated;
+float translateSans = 1;
+float posXSansDefeated = 10;
+float FinalposX;
+boolean esc1 = false;
+boolean Defeat = false;
+boolean esc2 = false;
+boolean bbCeniza = false;
+// Funcion Para Printear un sprite o otro depeniendo del Ataque que se este realizando
 void PrintEnemy()
 {
   if (bezzerSuperado == false)
   {
   image(SpriteEnemy1, width/3, height/9,width/3,height/1.5f);
+    if(DañoMostrado == false)
+      {
+        LutsSans();
+      }
   }
   else if(bezzerSuperado == true)
   {
     image(EnemyShuriken, width/3, height/9,width/3,height/1.5f);
   }
   
+  
 }
+// Funcion para printear la vida quitada por el Jugador a Sans
 void PrintVidaPNJ()
 {
   if (DañoMostrado) 
@@ -26,7 +42,7 @@ void PrintVidaPNJ()
     fill(255, 0, 0);
     text(dañoDelJugador, width/2, height/6);
     
-    // Si han pasado más de 1000ms (1 segundo), oculta el daño
+    // Si han pasado más de 1000ms oculta el daño
     if (millis() - tiempoDañoMostrado > 1000) 
     {
       DañoMostrado = false;
@@ -41,8 +57,10 @@ void PrintVidaPNJ()
   rect(width/3.5f,height/24,vidaPNJ*(width/3.5f)/MaxvidaPNJ, height/20);
   }
 }
+// Funcion para restar la vida quitada a Sans
 void PNJRecibirDaño(int dmg)
 {
+  // Resta vida a Sans cuando el Jugador ataca
   dañoDelJugador = dmg;
   vidaPNJ -= dmg;
   if(vidaPNJ < 0)
@@ -52,14 +70,29 @@ void PNJRecibirDaño(int dmg)
   DañoMostrado = true;
   tiempoDañoMostrado = millis();
 }
-PImage SansDefeated;
-float translateSans = 1;
-float posXSansDefeated = 10;
-float FinalposX;
-boolean esc1 = false;
-boolean Defeat = false;
-boolean esc2 = false;
-boolean bbCeniza = false;
+// Cuando el daño esta activado Sans se pone de color gris, demostrando que le hemos dado
+void LutsSans()
+{
+  // Funcion de luts de classe para cambiar a grises
+    for(int i=0;i<SpriteEnemy2.width;i++){ // Recorre columnas, osea en X
+    for(int j=0;j<SpriteEnemy2.height;j++){ // Recorre filas, osea en Y
+      // Ya estoy en el pixel i,j de la imagen
+      // 1) Get de los valores RGB del pixel
+      color pillo_el_color = SpriteEnemy2.get(i,j);
+      // 2) Aplicar la formula, la LUT
+      float r = red(pillo_el_color);
+      float g = green(pillo_el_color);
+      float b = blue(pillo_el_color);
+      float y = 0.299*r+0.587*g+0.114*b; // Aplicar la formula
+      color el_color_nuevo = color(y);
+      // 3) Set de los nuevos valores al pixel
+      SpriteEnemy1.set(i,j,el_color_nuevo);
+    }
+  }
+  image(SpriteEnemy2,width/3, height/9,width/3,height/1.5f);
+
+}
+// Funcion para caundo el Jugador Gana a Sans
 void GoodEnding()
 {
   if(!Defeat)
@@ -67,6 +100,7 @@ void GoodEnding()
     if(translateSans < 1.15)
   {
   SoundTrack.pause();
+  // Se hace un escalado  para hacer mas grande la imagen 
   pushMatrix();
   scale(translateSans);
   image(SansDefeated, width/3,height/9,width/3,height/1.5f);
@@ -78,7 +112,7 @@ void GoodEnding()
   
   else if( width/2.5f-((width/3*translateSans)-posXSansDefeated) < width/8.5f)
   {
-    
+    // Transladamos hacha la izquierda para centrar la imagen
   pushMatrix();
   translate(-posXSansDefeated,0);
   image(SansDefeated, width/3*translateSans,height/9*translateSans,width/3*translateSans,height/1.5f*translateSans);
@@ -93,6 +127,7 @@ void GoodEnding()
     aparicion = 255;
   }
   }
+  // Texto que te dice Sans antes de Desaparecer
   if(esc1)
   {
     image(SansDefeated, FinalposX,height/9*translateSans,width/3*translateSans,height/1.5f*translateSans);
@@ -121,13 +156,15 @@ void GoodEnding()
     }
   
   }
+  
   if(!esc1 && esc2 )
   {
-    
+    // Desaparicion de Sans 
     tint(255,aparicion);
     image(SansDefeated, FinalposX,height/9*translateSans,width/3*translateSans,height/1.5f*translateSans);
     if(aparicion <= 0 )
      {
+       // Texto de agradecimineto por haber completado el juego
       stroke(255);
       strokeWeight(5);
       fill(0);

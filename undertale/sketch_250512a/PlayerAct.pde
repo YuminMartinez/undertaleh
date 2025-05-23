@@ -1,3 +1,4 @@
+// Variables del boton ACT
 int ActSelection = 0;
 int vtext = 25;
 int timeText = 0;
@@ -11,9 +12,11 @@ boolean Checktext1 = false;
 boolean Checktext2 = false;
 boolean FindObject = false;
 boolean WeaponFinded = false;
+
+
 void PJAct()
 {
-  //noFill();
+  // Imprime las opciones en el ACT
   stroke(255);
   strokeWeight(5);
   fill(0);
@@ -37,14 +40,14 @@ void PJAct()
 }
 void CheckStatsEnemy()
 {
-  
+  // Te explica la vida que le queda a Sans
   stroke(255);
   strokeWeight(5);
   fill(0);
   rect(width/6, height/1.8f,2*width/3, height/5);
   fill(255);
   textSize(48); 
-  
+  // Hacemos que las letras vayan apareciendo poco a poco
   if(Checktext1)
   {
     timeText = millis();
@@ -66,6 +69,7 @@ void CheckStatsEnemy()
     ended = true;
   }
   }
+    // Hacemos que las letras vayan apareciendo poco a poco
   if(Checktext2)
   {
     timeText = millis();
@@ -89,6 +93,7 @@ void CheckStatsEnemy()
   }
   
 }
+// Opcion de buscar un objeto, hay un 25% de que te encuentres una espada que te da 50 + de daño
 void SearchObject()
 {
   if(firstSearch == false)
@@ -104,7 +109,7 @@ void SearchObject()
   if(possibility == 4 && WeaponFinded == false)
   {
    
-     
+       // Hacemos que las letras vayan apareciendo poco a poco
     timeText = millis();
     String SwordFinded = "You've got a sword, now you hit harder";
     if(!ended)
@@ -126,7 +131,8 @@ void SearchObject()
     
   }
   else if(possibility < 4 || WeaponFinded == true)
-  {
+  {  
+    // Hacemos que las letras vayan apareciendo poco a poco
     timeText = millis();
     String TryFind = "You search but can't find anything in the room";
     if(!ended)

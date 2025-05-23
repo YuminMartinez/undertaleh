@@ -1,7 +1,12 @@
+
+// Variables de ITEMS
+
 boolean lunchTime = false;
 boolean EatFood = false;
 boolean Eated = false;
 int healthRecovered = 0;
+
+// Se imprime los Objetos que dispone el Jugador
 void PrintBackpack()
 {
  
@@ -15,6 +20,8 @@ void PrintBackpack()
   text("Dango", width/4.7f, height/1.52f); 
   image(img, width/6, height/1.65f,width/21.33f,height/13.5f);
 }
+
+// Se come la comida, curandose y se imprime un text diciendo la cantidad de vida que se ha curado
 void EatFood()
 {
   if(!Eated)

@@ -1,3 +1,5 @@
+
+// Opcion al enemigo que queremos pegar
 void PJAttack()
 {
   
@@ -11,6 +13,8 @@ void PJAttack()
   textSize(48);
   text("Sans-kun amante del ketchup ", width/2.8f, height/1.5f);
 }
+
+// Se imprime la barra de ataque para golpear
 void PrintBarraAtaque()
 {
   // Ataque flojo
@@ -31,6 +35,8 @@ void PrintBarraAtaque()
    stroke(0);
   strokeWeight(7);
   rect(barraAtaque,height/1.8f,20, height/5);
+  // Esto hace que una barra se mueva hacia la derecha para realizar el ataque
+  // Dependiendo de donde pare la barra, el ataque será mas potente o menos
   barraAtaque+= 30;
   if(barraAtaque >=width*0.84f)
   {
@@ -40,7 +46,7 @@ void PrintBarraAtaque()
   }
   
 }
-
+// Se calcuola el daño que se ha realizado dependiendo de la zona a la que se ha parado la barra
 int  CalcularDañoPJ()
 {
   int dmg = 0;
