@@ -26,7 +26,7 @@ class Daruma extends Position {
   translate(x + sizeX/2, y + sizeY/2); // trasladar al centro del daruma
   rotate(rotation);                   // aplicar rotación
   imageMode(CENTER);
-  image(img, 0, 0, sizeX, sizeY);  // tu imagen del daruma
+  image(img, 0, 0, sizeX, sizeY);  
   imageMode(CORNER);
   popMatrix();
 }

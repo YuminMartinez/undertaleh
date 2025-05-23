@@ -1,5 +1,5 @@
 PImage toriil;
-enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO }
+enum PositionRect { IZQUIERDA, DERECHA, ARRIBA, ABAJO } // para saber donde se coloca el daruma ,rectangulo y el torii
 
 // Variables de estado
 boolean SecondStageActive = false;
@@ -24,7 +24,7 @@ void SecondAttack()
   SecondStageActive = true;
   gameControl = GameControl.CLICK_RATON;
 
-  // Dibujar cuadrado de ataque principal (blanco)
+   // Dibuja el área de juego (cuadrado blanco)
   noFill();
   stroke(255);
   strokeWeight(3);
@@ -39,13 +39,12 @@ void SecondAttack()
 
   // Lógica de temporización del ataque
   if (!mostrarAdvertencia && !mostrarAtaque) {
-    // Iniciar nuevo ataque
- 
+     // Selecciona una posición aleatoria para el ataque
    posicionActual = PositionRect.values()[(int)random(0, 4)];
     mostrarAdvertencia = true;
     tiempoInicioAtaque = millis();
     
-    // Posición inicial del Daruma según el ataque
+     // Posiciona y rota el Daruma según la dirección del ataque
    switch(posicionActual) {
   case ABAJO:
     daruma.x = xPos + lado/2 - daruma.sizeX/2;
@@ -68,6 +67,7 @@ void SecondAttack()
     daruma.rotation = HALF_PI;
     break;
 }
+// Guarda posiciones para el salto
     xOriginal = daruma.x;
     yOriginal = daruma.y;
     xObjetivo = centroX; 
@@ -81,7 +81,7 @@ void SecondAttack()
   float imgWidth = 0; 
   float imgHeight = 0;
 
-  // Calcular posición  del rectangulo y tamaño de la imagen bsegún el lado
+  // Calcular posición  del rectangulo y tamaño de la imagen según el lado
   switch(posicionActual) {
     case ABAJO:
       rectW = lado - offset - 3;
@@ -124,7 +124,7 @@ void SecondAttack()
       break;
   }
 
-  // Mostrar advertencia (rectángulo rojo)
+   // Fase de advertencia (rectángulo rojo semitransparente)
   if (mostrarAdvertencia) {
     noFill();
     stroke(255, 0, 0, 150);
@@ -166,7 +166,6 @@ void SecondAttack()
       float toriiH = rectH;
       
       if (colisionDarumaTorii(toriiX, toriiY, toriiW, toriiH)) {
-        // ¡Colisión detectada!
         println("¡Colisión con el Torii!");
         colisionActiva = false; // Evitar múltiples detecciones
        
@@ -183,7 +182,7 @@ void SecondAttack()
     manejarSalto();
   }
 
-  // Dibujar el Daruma
+  // Dibujar el Daruma con rotacion
   daruma.displayR();
 }
 float velocidadSalto = 0.3f;
@@ -215,7 +214,7 @@ void manejarSalto() {
    
 
 boolean colisionDarumaTorii(float toriiX, float toriiY, float toriiW, float toriiH) {
-    // Área de colisión del Daruma (ajustar según tus necesidades)
+    // Área de colisión del Daruma 
     float darumaLeft = daruma.x;
     float darumaRight = daruma.x + daruma.sizeX;
     float darumaTop = daruma.y;

@@ -2,18 +2,22 @@
   PVector[] puntos_de_ctrl;
   PVector[] coefs;
 
-  curba_interpolacion(PVector[] p) {
-    puntos_de_ctrl = new PVector[4];
+  curba_interpolacion(PVector[] p)
+  {
+    puntos_de_ctrl = new PVector[4];// 4 puntos de control
     coefs = new PVector[4];
     for (int i = 0; i < 4; i++) {
       puntos_de_ctrl[i] = new PVector(p[i].x, p[i].y);
-      coefs[i] = new PVector(0.0, 0.0);
+      coefs[i] = new PVector(0.0, 0.0); // Coeficientes del polinomio cúbico
     }
   }
 
-  void calcular_coefs() {
+  void calcular_coefs() 
+  {
+     // Término constante (punto inicial)
     coefs[0].x = puntos_de_ctrl[0].x;
     coefs[0].y = puntos_de_ctrl[0].y;
+    // Coeficientes calculados para interpolación cúbica exacta , garantizando que la cuirva pase por ellos si o si 
     coefs[1].x = -5.5*puntos_de_ctrl[0].x + 9.0*puntos_de_ctrl[1].x - 4.5*puntos_de_ctrl[2].x + puntos_de_ctrl[3].x;
     coefs[1].y = -5.5*puntos_de_ctrl[0].y + 9.0*puntos_de_ctrl[1].y - 4.5*puntos_de_ctrl[2].y + puntos_de_ctrl[3].y;
     coefs[2].x = 9.0*puntos_de_ctrl[0].x - 22.5*puntos_de_ctrl[1].x + 18.0*puntos_de_ctrl[2].x - 4.5*puntos_de_ctrl[3].x;
@@ -39,7 +43,8 @@
 
 
 
-class Shuriken {
+class Shuriken
+{
   PImage img;
   PVector posicion;
   float velocidad;
@@ -49,7 +54,8 @@ class Shuriken {
   float angulo;
   float escala;
   
-  Shuriken(curba_interpolacion[] curvas, String imagenPath) {
+  Shuriken(curba_interpolacion[] curvas, String imagenPath)
+  {
     this.curvas = curvas;
     img = loadImage(imagenPath);
     posicion = new PVector();
@@ -63,10 +69,13 @@ class Shuriken {
   void actualizar() {
     // Calcular posición en la curva actual
     curba_interpolacion curva = curvas[curvaActual];
+    
+    // Calcula posición en curva (x e y por separado)
     posicion.x = curva.coefs[0].x + curva.coefs[1].x * parametroU +
                  curva.coefs[2].x * parametroU * parametroU +
                  curva.coefs[3].x * parametroU * parametroU * parametroU;
                  
+                   // Calcula derivada (tangente) para rotación
     posicion.y = curva.coefs[0].y + curva.coefs[1].y * parametroU +
                  curva.coefs[2].y * parametroU * parametroU +
                  curva.coefs[3].y * parametroU * parametroU * parametroU;

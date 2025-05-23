@@ -1,83 +1,75 @@
-//variables
+// Variables globales para imágenes y objetos
 PImage darumaImg;
 PImage DarumaFeito;
 Daruma daruma;
- PImage katana;
+PImage katana;
 
+// Objetos para las curvas de katanas
 curva curvaKatana;
 curva curvaKatana2;
-boolean moveAttackOne = false ;
-
+boolean moveAttackOne = false;
 boolean bezzerSuperado = false;
 
-void refreshAttackOne()
-{
-     inicializarCurvasShuriken();
-    katanas_iniciar();
+
+// Función para reiniciar el ataque
+void refreshAttackOne() {
+    inicializarCurvasShuriken();   
+    katanas_iniciar();              
     inicializarSakurasShurikenFase();
     
+    // Resetear banderas y contadores
     bezzerSuperado = false;
     juegoActivo = true;
-   moveAttackOne = false ;
+    moveAttackOne = false;
     bolaActual = 0; 
-    
-
 }
 
 
-
+// Función principal del primer ataque
 void attackone() {
-  
-  bolas[bolaActual].display();
-  verificarColisiones();
-  
-  
-  //CUADRADO
-  
-  moveAttackOne = true;
-
-  stroke(255);  // Borde blanco estilo Undertale
-  strokeWeight(3);  // Más grueso para que se vea épico
-  noFill();
-  // Tamaño del cuadrado 
-  float lado = width * 0.15f;  // 15% del ancho de pantalla (más proporcional) 
-
-  // Posición X: 
-  float xPos = (width/3 + width/2) / 2 - lado/2 + 180; // +100px a la derecha
-  // Posición Y: 
-  float yPos = height/2.2f; 
-  rect(xPos, yPos, lado, lado);  
-  
+    // Mostrar la sakura actual y verificar colisiones
+    bolas[bolaActual].display();
+    verificarColisiones();
+    
+    // Dibujar y manejar el cuadrado
+    moveAttackOne = true;
+    stroke(255);  
+    strokeWeight(3);  
+    noFill();
+    float lado = width * 0.15f;  
+    
+    // Posicionamiento del cuadrado
+    float xPos = (width/3 + width/2) / 2 - lado/2 + 180; 
+    float yPos = height/2.2f; 
+    rect(xPos, yPos, lado, lado);  
+    
+    
     daruma.limitarMovimiento(xPos, yPos, xPos +lado, yPos + lado); 
     
+    // Manejar la visualización del daruma antes del click
+    if (CanMove == false) {
+       
+        daruma.x = (xPos +lado/2)- 20;
+        daruma.y = yPos +lado/2;
+        daruma.display();
+    } else {
+        daruma.display();
+    }
     
-    if (CanMove == false)
-    {
-      daruma.x =   (xPos +lado/2)- 20;
-      daruma.y = yPos +lado/2;
-      daruma.display();
+    // Mostrar katanas Bézier si no se han superado
+    if (bezzerSuperado == false) {
+        curvaKatana.curva_de_katanas();
+        curvaKatana2.curva_de_katanas();
     }
-    else
-    {
-      daruma.display();
-    }
-  
-     
-  
-  
-  if (bezzerSuperado == false){
-  curvaKatana.curva_de_katanas();
-  curvaKatana2.curva_de_katanas();
-  }
 }
 
-//bezzier
+// Inicialización de las curvas Bézier para las katanas
 void katanas_iniciar() {
   katana = loadImage("katana.png");
   float lado = width * 0.15f;
   float xPos = (width/3 + width/2) / 2 - lado/2 + 180;
   float yPos = height / 2.2f;
-
+    // Crear dos curvas Bézier (inferior y superior)
   // Puntos de control (P0 y P3 fijos, P1 y P2 móviles)
   PVector[] p = new PVector[4];
   p[0] = new PVector(xPos + lado * 0.1, yPos + lado * 0.4 + 70); // P0 fijo
@@ -103,30 +95,24 @@ void katanas_iniciar() {
 
 
 /////////////////////////------------------------curva interpolacion ----------/////////
-//BOLASS
 
 
+// Clase para las bolas/sakuras que el jugador debe recolectar
 // BOLAS DE RECOLECTA
 Bolas[] bolas = new Bolas[4];
 PVector posicionA, posicionB; // Solo declaramos los objetos, sin inicializar aún
 int bolaActual = 0;
 boolean juegoActivo = true; // Controla si el sistema de bolas está activo
-
 //sakura en shureken
-
 Bolas[] bolasShuriken = new Bolas[4];
-
 int bolaShurikenActual = 0;
 boolean todasSakurasShurikenRecolectadas  = false; 
 
 
-
-
-
 class Bolas extends Position {
-  PImage imgSakura;  // Todos usan la misma imagen
+  PImage imgSakura;  
   boolean visible;
-  float tamano = 30; // Tamaño fijo para todas
+  float tamano = 30; 
   
   // Constructor
   Bolas(float x, float y) {
@@ -195,16 +181,6 @@ void verificarColisiones() {
   {
   println("¡Colisión detectada con el Daruma!");
    PJLife--;
-  /////////////////
-  
- 
-  
-  
-//  ---------LUTSSSSS ------------
-  
-  
-  
-  ////// 
   
   }
   
@@ -234,34 +210,13 @@ void verificarColisiones() {
         }
     }
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   if (!juegoActivo && todasSakurasShurikenRecolectadas == false)
   {
     
     bezzerSuperado = true;
     printShurikens();
- 
-    
   }
-     if( todasSakurasShurikenRecolectadas == true)
-    {
-       ////////////////CAMBIAR EL GAME MODE
-    }
-  
   if (bolas[bolaActual].colisionaConDaruma(daruma)) {
     bolas[bolaActual].visible = false;
     
@@ -271,21 +226,15 @@ void verificarColisiones() {
     } else { // Si es la 4ta bola
       juegoActivo = false;
       println("¡TODAS LAS BOLAS RECOLECTADAS!");
-      
-       
-      
     }
   }
 }
 
 
-
 ///// segunda fase
-
 curba_interpolacion[] curvasShuriken = new curba_interpolacion[5];  // Array para 5 curvas
 Shuriken shuriken;
 PImage imgShuriken;
-
  
   
 void inicializarCurvasShuriken() {
@@ -295,9 +244,9 @@ void inicializarCurvasShuriken() {
   
    float lado = width * 0.15f;  // 15% del ancho de pantalla (más proporcional) 
 
-  // Posición X: 
+
   float xPos = (width/3 + width/2) / 2 - lado/2 + 180; // +100px a la derecha
-  // Posición Y: 
+ 
   float yPos = height/2.2f; 
   // Crear 5 curvas con puntos de control aleatorios
   for (int i = 0; i < curvasShuriken.length; i++) {
@@ -315,7 +264,7 @@ void inicializarCurvasShuriken() {
 }
   
 void printShurikens() {
-    // This block should only show when verCurvaInter is true
+   // funcion para ver las curvas de interpolacion (activar o descativar con "p")
     if (verCurvaInter == true) {
         for (int i = 0; i < curvasShuriken.length; i++) {
             curvasShuriken[i].pintar_curva(); // <- curva oculta
@@ -329,7 +278,7 @@ void printShurikens() {
         }
     }
     
-    // The rest of the shuriken logic should always execute
+  
     shuriken.actualizar();
     shuriken.dibujar();
     

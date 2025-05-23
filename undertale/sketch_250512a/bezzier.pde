@@ -20,6 +20,7 @@ class curva {
   float paso = 0.05;
 
   for (float u = 0.0; u <= 1.0; u += paso) {
+       // Calcula punto en la curva usando polinomio Bézier
     float x = coefs[0].x + coefs[1].x * u + coefs[2].x * u * u + coefs[3].x * u * u * u;
     float y = coefs[0].y + coefs[1].y * u + coefs[2].y * u * u + coefs[3].y * u * u * u;
 
@@ -34,11 +35,12 @@ class curva {
 }
 
 
-  void actualizar_puntos_intermedios() {
+  void actualizar_puntos_intermedios() 
+  {
     tiempo += 0.05;
     float amplitud = 50;
     float frecuencia = 0.5;
-
+     // Anima los puntos intermedios (1 y 2) con movimiento sinusoidal
     puntos_de_ctrl[1].x = puntos_de_ctrl[0].x + amplitud * sin(tiempo * frecuencia);
     puntos_de_ctrl[1].y = puntos_de_ctrl[0].y + amplitud * cos(tiempo * frecuencia);
 
@@ -48,7 +50,10 @@ class curva {
     calcular_coefs();
   }
 
-  void calcular_coefs() {
+  void calcular_coefs()
+  {
+     // Calcula coeficientes del polinomio Bézier cúbico:
+    // P(u) = C0 + C1*u + C2*u² + C3*u³
     coefs[0].x = puntos_de_ctrl[0].x;
     coefs[0].y = puntos_de_ctrl[0].y;
 
@@ -63,18 +68,20 @@ class curva {
   }
 
   void curva_de_katanas() {
-    actualizar_puntos_intermedios();
+    actualizar_puntos_intermedios(); // Actualiza animación para que la curva se mueva
     float x, y, dx, dy;
     float paso = 0.05;
-
+      // Calcula posición en curva
     for (float u = 0.0; u <= 1.0; u += paso) {
       x = coefs[0].x + coefs[1].x * u + coefs[2].x * u * u + coefs[3].x * u * u * u;
       y = coefs[0].y + coefs[1].y * u + coefs[2].y * u * u + coefs[3].y * u * u * u;
-
+      
+      // Calcula derivada (tangente) para rotación
       dx = coefs[1].x + 2 * coefs[2].x * u + 3 * coefs[3].x * u * u;
       dy = coefs[1].y + 2 * coefs[2].y * u + 3 * coefs[3].y * u * u;
       float angulo = atan2(dy, dx);
 
+      // Dibuja katana rotada según la dirección de la curva
       pushMatrix();
       translate(x, y);
       rotate(angulo);
