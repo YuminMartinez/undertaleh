@@ -6,7 +6,7 @@ float xObjetivo, yObjetivo;
 
 float velocidad = 5;  // velocidad de salto (ajustable)
 
-
+boolean verCurvaInter = false;
 
 
 void mousePressed() {
@@ -60,6 +60,11 @@ void keyPressed()
       gameState = GameState.TRANSITION;
         transitionX = 0;// Cambia al segundo estado
     }
+  }
+  
+  if(keyCode == 'ñ')
+  {
+    verCurvaInter = !verCurvaInter;
   }
   
   if(ReallyMercy)
@@ -132,7 +137,7 @@ void keyPressed()
          ChangeToMain = true; 
          ended = false;
          CharNext = 0;
-          timeTransition = millis();
+         timeTransition = millis();
          
        }
     if(keyCode == ENTER && Checktext1)

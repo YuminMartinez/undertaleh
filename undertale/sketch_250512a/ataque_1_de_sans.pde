@@ -290,18 +290,24 @@ void inicializarCurvasShuriken() {
   
 
 void printShurikens() {
-    // Dibujar todas las curvas del shuriken (COMENTADO)
-    //for (int i = 0; i < curvasShuriken.length; i++) {
-    //    curvasShuriken[i].pintar_curva(); // <- curva oculta
+  
+  if (verCurvaInter == true)
+  {
+  
+    for (int i = 0; i < curvasShuriken.length; i++) {
+    curvasShuriken[i].pintar_curva(); // <- curva oculta
         
-        // Dibujar puntos de control (COMENTADO)
-        //stroke(255, 0, 0);
-        //strokeWeight(8);
+        stroke(255, 0, 0);
+        strokeWeight(8);
         
-        //for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
-        //    point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y); // <- Puntos ocultos
+        for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
+           point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y); 
+        
+        }
+    }
+  }
             
-            // Solo esto se ejecuta: el shuriken
+           
             shuriken.actualizar();
             shuriken.dibujar();
             
@@ -323,8 +329,6 @@ void printShurikens() {
         //}
     //} 
 }
- 
-  
-  
+   
   
   
