@@ -81,12 +81,8 @@ void draw()
     break;
     
     case FIRST_SANSATTACK:
-<<<<<<< Updated upstream
-     
-     
-      PrintEnemy();
-=======
-<<<<<<< HEAD
+
+
      attackone();
      PrintEnemy();
      PrintVidaPNJ();
@@ -109,12 +105,11 @@ void draw()
     
     case  THIRD_SANSATTACK:
        PrintEnemy();
-=======
+
      
      
       PrintEnemy();
->>>>>>> origin/fetures/3rAtaque
->>>>>>> Stashed changes
+
       secondStage();
       PrintVidaPNJ();
       DodgeAttack();
@@ -125,20 +120,6 @@ void draw()
           MenuBattle = true;
       }
     break;
-     
-    case SECOND_SANSATTACK:
-     PrintEnemy();
-     PrintVidaPNJ();
-     SecondAttack();
-    break;
-    
-    case  THIRD_SANSATTACK:
-    PrintEnemy();
-     PrintVidaPNJ();
-      attackone();
-     
-     
-      break;
           
     case ENEMY_DEFEAT:
       GoodEnding();
