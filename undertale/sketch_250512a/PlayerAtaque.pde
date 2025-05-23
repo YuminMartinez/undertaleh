@@ -9,7 +9,7 @@ void PJAttack()
   image(img, width/6, height/1.6f,width/21.33f,height/13.5f);
   fill(255);
   textSize(48);
-  text("*Insertar Nombre enemigo*", width/2.8f, height/1.5f);
+  text("Sans-kun amante del ketchup ", width/2.8f, height/1.5f);
 }
 void PrintBarraAtaque()
 {
