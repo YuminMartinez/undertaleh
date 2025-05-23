@@ -12,7 +12,7 @@ class Position {
 
 class Daruma extends Position {
   PImage img;
-
+  float rotation = 0;
   Daruma(float x, float y, float sizeX, float sizeY, PImage img) {
     super(x, y, sizeX, sizeY);
     this.img = img;
@@ -21,6 +21,15 @@ class Daruma extends Position {
   void display() {
     image(img, x, y, sizeX, sizeY);
   }
+  void displayR() {
+   pushMatrix();
+  translate(x + sizeX/2, y + sizeY/2); // trasladar al centro del daruma
+  rotate(rotation);                   // aplicar rotación
+  imageMode(CENTER);
+  image(img, 0, 0, sizeX, sizeY);  // tu imagen del daruma
+  imageMode(CORNER);
+  popMatrix();
+}
   
   void limitarMovimiento(float minX, float minY, float maxX, float maxY) {
   x = constrain(x, minX, maxX - sizeX);
