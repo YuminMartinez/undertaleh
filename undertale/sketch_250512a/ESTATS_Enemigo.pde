@@ -1,4 +1,4 @@
-int MaxvidaPNJ = 1;
+int MaxvidaPNJ = 1000;
 int vidaPNJ = MaxvidaPNJ;
 int dmg = 1;
 PImage Enemy;
