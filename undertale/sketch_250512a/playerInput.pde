@@ -61,7 +61,14 @@ void keyPressed() {
   if (keyCode == 'P') {
     verCurvaInter = !verCurvaInter;
   }
-
+  if(gameState == GameState.ENEMY_DEFEAT)
+  {
+    if(keyCode == ENTER && ended)
+    {
+      esc1 = false;
+      esc2 = true;
+    }
+  }
   if (ReallyMercy) {
     if (keyCode == ENTER && Mercytext2) {
       CharNext = 0;
