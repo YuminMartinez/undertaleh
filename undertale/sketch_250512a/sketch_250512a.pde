@@ -16,7 +16,7 @@ GameState gameState = GameState.FIRST_STAGE;
 boolean TrAttack = false;
 enum GameControl { RATON, CLICK_RATON }
 
-GameControl gameControl = GameControl.RATON;
+GameControl gameControl = GameControl.CLICK_RATON;
 
 
 
@@ -58,7 +58,7 @@ void draw()
   frameRate(30);
   background(0);
       
-  if (gameControl == GameControl.RATON) {
+  if (CanMove == true) {
     daruma.x = mouseX - daruma.sizeX / 2;
     daruma.y = mouseY - daruma.sizeY / 2;
   }
@@ -94,6 +94,7 @@ void draw()
     break;
      
     case SECOND_SANSATTACK:
+      CanMove = false;
      PrintEnemy();
      PrintVidaPNJ();
      secondStage();
@@ -150,7 +151,7 @@ void draw()
         {
             nivel = 1;
             TrAttack = false;
-            refreshAttackOne();
+            
         }
          if(millis() - timeTransition > 1000 && nivel == 3)
         {
@@ -176,6 +177,7 @@ void draw()
         TrAttack = false;
          //MenuBattle = true;
        gameState = GameState.FIRST_SANSATTACK;
+         refreshAttackOne();
        nivel++;
         }
          
