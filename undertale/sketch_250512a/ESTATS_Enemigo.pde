@@ -7,7 +7,15 @@ int tiempoDañoMostrado = 0;
 int dañoDelJugador = 0;
 void PrintEnemy()
 {
+  if (bezzerSuperado == false)
+  {
   image(SpriteEnemy1, width/3, height/9,width/3,height/1.5f);
+  }
+  else if(bezzerSuperado == true)
+  {
+    image(SpriteEnemy1, width/3, height/9,width/3,height/1.5f);
+  }
+  
 }
 void PrintVidaPNJ()
 {
