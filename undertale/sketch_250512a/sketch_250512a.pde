@@ -19,7 +19,7 @@ GameControl gameControl = GameControl.CLICK_RATON;
 
 
 
-int nivel = 1;
+int nivel = 2;
   
 void setup(){
   
