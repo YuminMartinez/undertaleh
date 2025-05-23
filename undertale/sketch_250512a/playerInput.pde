@@ -247,7 +247,7 @@ void keyPressed()
 
     }
    
-   if(faseSansAtaque == 3)
+   if(nivel == 3)
    {
      if(keyCode == DOWN)
      {

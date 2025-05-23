@@ -10,18 +10,19 @@ PImage SansInicio;
 //Gif miGif;
 int timeTransition = 0;
 //VARIABLES GLOBALES
-enum GameState { FIRST_STAGE,TRANSITION, SECOND_STAGE,FIRST_SANSATTACK ,SECOND_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
+enum GameState { FIRST_STAGE,TRANSITION, MENU,FIRST_SANSATTACK ,SECOND_SANSATTACK,THIRD_SANSATTACK, ENEMY_DEFEAT, PLAYER_DEFEAT}
 GameState gameState = GameState.FIRST_STAGE;
 
 enum GameControl { RATON, CLICK_RATON }
 
 GameControl gameControl = GameControl.RATON;
 
-int faseSansAtaque = 0;
 
-int nivel = 1;
+
+int nivel;
   
 void setup(){
+  nivel= 1;
   size(1920, 1080); 
   frameRate(30);
   background(0); 
@@ -70,7 +71,7 @@ void draw()
     secondStageTransition();
     break;
     
-    case SECOND_STAGE:
+    case MENU:
     if(SoundisON == false)
     {
       SoundTrack.loop();
@@ -80,43 +81,39 @@ void draw()
      ActionsPlayer(); 
     break;
     
-    case  SECOND_STAGE:
+    case FIRST_SANSATTACK:
+     attackone();
+     PrintEnemy();
+     PrintVidaPNJ();
+    break;
+     
+    case SECOND_SANSATTACK:
+     PrintEnemy();
+     PrintVidaPNJ();
+     SecondAttack();
+    break;
+    
+    case  THIRD_SANSATTACK:
        PrintEnemy();
       secondStage();
       PrintVidaPNJ();
       DodgeAttack();
       if(millis() - timeAttack > 10000)
       {
-          gameState = GameState.SECOND_STAGE;
+          gameState = GameState.MENU;
           ResetAtt3();
           MenuBattle = true;
       }
       break;
-      
-    case FIRST_SANSATTACK:
-    attackone();
-     PrintEnemy();
-     PrintVidaPNJ();
-    break;
+          
     case ENEMY_DEFEAT:
       GoodEnding();
       break;
     case PLAYER_DEFEAT:
      PlayerDefeat();
-      break;
- 
-  
-      
-      case SECOND_SANSATTACK:
-      PrintEnemy();
-       PrintVidaPNJ();
-       SecondAttack();
-      break;
-      
-      
+      break;  
   }
- 
-  
+   
  if(PJLife > PJMaxLife)
  {
    PJLife = PJMaxLife;
@@ -137,9 +134,9 @@ void draw()
         if(millis() - timeTransition > 1000 && nivel == 1)
         {
         ChangeToMain = false;
-        faseSansAtaque = 3;
+        
          //MenuBattle = true;
-       gameState = GameState.SECOND_STAGE;
+       gameState = GameState.FIRST_SANSATTACK;
        nivel++;
         }
           if(millis() - timeTransition > 1000 && nivel == 2)
@@ -149,6 +146,17 @@ void draw()
        gameState = GameState.SECOND_SANSATTACK;
        nivel++;
         }
-        
+        if(millis() - timeTransition > 1000 && nivel == 3)
+        {
+          ChangeToMain = false;
+          
+         //MenuBattle = true;
+         gameState = GameState.THIRD_SANSATTACK;
+         nivel++;
+        }
+        if(nivel > 3)
+        {
+            nivel = 1;
+        }
       }  
 }

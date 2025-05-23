@@ -199,7 +199,7 @@ void verificarColisiones() {
             if (bolaShurikenActual >= bolasShuriken.length) {
                 todasSakurasShurikenRecolectadas = true;
                 println("¡Todas las sakuras de shurikens recolectadas!");
-                gameState = GameState.SECOND_STAGE;
+                gameState = GameState.MENU;
                  MenuBattle = true;
 
             } else {

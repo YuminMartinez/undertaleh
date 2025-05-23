@@ -17,7 +17,7 @@ void secondStageTransition() {
   // Cuando la barra cubre toda la pantalla, pasar a otro estado
   if (transitionX > width) {
     
-     gameState = GameState.SECOND_STAGE;
+    gameState = GameState.MENU;
   }
   MenuBattle = true;
    

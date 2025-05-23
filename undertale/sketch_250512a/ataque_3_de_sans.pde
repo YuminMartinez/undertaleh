@@ -9,6 +9,8 @@ boolean firstRound = true;
 
 void DodgeAttack()
 {
+  
+ gameControl = GameControl.RATON;
   if(firstRound)
   {
     timeAttack = millis();
