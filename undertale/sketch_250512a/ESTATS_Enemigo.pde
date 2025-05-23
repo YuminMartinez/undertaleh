@@ -5,6 +5,7 @@ PImage Enemy;
 boolean DañoMostrado = false; 
 int tiempoDañoMostrado = 0;
 int dañoDelJugador = 0;
+PImage EnemyShuriken;
 void PrintEnemy()
 {
   if (bezzerSuperado == false)
@@ -13,7 +14,7 @@ void PrintEnemy()
   }
   else if(bezzerSuperado == true)
   {
-    image(SpriteEnemy1, width/3, height/9,width/3,height/1.5f);
+    image(EnemyShuriken, width/3, height/9,width/3,height/1.5f);
   }
   
 }

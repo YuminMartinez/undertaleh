@@ -22,11 +22,14 @@ GameControl gameControl = GameControl.RATON;
 int nivel = 1;
   
 void setup(){
+  
+  EnemyShuriken = loadImage("NinjaSans.png"); 
   size(1920, 1080); 
   frameRate(30);
   background(0); 
   barraAtaque = width/6;
     posY_Dead = height/2;
+    posX_Dead = width/2;
     SansInicio = loadImage("sansInicio.png");
     darumaImg = loadImage("daruma.png"); 
     DarumaFeito = RecibeDaño(darumaImg);

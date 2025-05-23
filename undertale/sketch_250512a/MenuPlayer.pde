@@ -52,17 +52,20 @@ void ActionsPlayer()
 boolean SoundGame = false;
 boolean EndSound = false;
 float posY_Dead = 0;
+float posX_Dead = 0;
 PImage GameOverScreen;
 int aparicion =0;
 
+
 void PlayerDefeat()
 {
-  
    //image
    SoundTrack.pause();
    HeartBreak.play();   
-   image(img,width/2,posY_Dead,width/21.33f,height/13.5f);
+   
+   image(img,posX_Dead,posY_Dead,width/21.33f,height/13.5f);
    posY_Dead += height/100;
+  // posY_Dead = scale(height/100);
    if(posY_Dead >= height)
    {
      posY_Dead = height;
