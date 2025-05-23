@@ -35,12 +35,10 @@ void setup(){
     DarumaFeito = RecibeDaño(darumaImg);
     daruma = new Daruma( 908, 562.91, width/29.33f,height/25.5f, darumaImg);
     // Carga las imágenes 
-  inicializarCurvasShuriken();
-  katanas_iniciar();
-   inicializarSakurasShurikenFase();
+  
     toriil = loadImage("toriil.png");
      GameOverScreen = loadImage("GameOverScreen.png"); 
-
+  refreshAttackOne();
   pXrojo = width/6;
   disRojo = width/1.5f;
   minim = new Minim(this);
@@ -153,6 +151,7 @@ void draw()
         {
             nivel = 1;
             TrAttack = false;
+            refreshAttackOne();
         }
          if(millis() - timeTransition > 1000 && nivel == 3)
         {

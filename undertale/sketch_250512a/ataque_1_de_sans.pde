@@ -8,12 +8,18 @@ curva curvaKatana;
 curva curvaKatana2;
 boolean moveAttackOne = false ;
 
-
-
-
-
-
 boolean bezzerSuperado = false;
+
+void refreshAttackOne()
+{
+    inicializarCurvasShuriken();
+            katanas_iniciar();
+           inicializarSakurasShurikenFase();
+           bezzerSuperado = false;
+}
+
+
+
 void attackone() {
   
   bolas[bolaActual].display();
@@ -288,46 +294,37 @@ void inicializarCurvasShuriken() {
   }
 }
   
-
 void printShurikens() {
-  
-  if (verCurvaInter == true)
-  {
-  
-    for (int i = 0; i < curvasShuriken.length; i++) {
-    curvasShuriken[i].pintar_curva(); // <- curva oculta
-        
-        stroke(255, 0, 0);
-        strokeWeight(8);
-        
-        for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
-           point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y); 
-        
+    // This block should only show when verCurvaInter is true
+    if (verCurvaInter == true) {
+        for (int i = 0; i < curvasShuriken.length; i++) {
+            curvasShuriken[i].pintar_curva(); // <- curva oculta
+            
+            stroke(255, 0, 0);
+            strokeWeight(8);
+            
+            for (int j = 0; j < curvasShuriken[i].puntos_de_ctrl.length; j++) {
+                point(curvasShuriken[i].puntos_de_ctrl[j].x, curvasShuriken[i].puntos_de_ctrl[j].y); 
+            }
         }
     }
-  }
-            
-           
-            shuriken.actualizar();
-            shuriken.dibujar();
-            
-            
-                if (!todasSakurasShurikenRecolectadas) {
+    
+    // The rest of the shuriken logic should always execute
+    shuriken.actualizar();
+    shuriken.dibujar();
+    
+    if (!todasSakurasShurikenRecolectadas) {
         for (int i = 0; i < bolasShuriken.length; i++) {
             if (bolasShuriken[i].visible) {
                 bolasShuriken[i].display();
             }
         }
-                }
-            
-            
-            
-            if (shuriken.colisionaConDaruma(daruma)) {
+    }
+    
+    if (shuriken.colisionaConDaruma(daruma)) {
         PJLife--; // Reduce la vida del jugador
         println("¡Colisión con Shuriken! Vida restante: " + PJLife);
     }
-        //}
-    //} 
 }
    
   

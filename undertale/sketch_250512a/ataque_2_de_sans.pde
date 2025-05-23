@@ -76,7 +76,7 @@ void SecondAttack()
   float imgWidth = 0; 
   float imgHeight = 0;
 
-  // Calcular posición según el lado
+  // Calcular posición  del rectangulo y tamaño de la imagen bsegún el lado
   switch(posicionActual) {
     case ABAJO:
       rectW = lado - offset - 3;

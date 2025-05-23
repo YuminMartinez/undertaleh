@@ -53,7 +53,7 @@ class Shuriken {
     this.curvas = curvas;
     img = loadImage(imagenPath);
     posicion = new PVector();
-    velocidad = 0.05;
+    velocidad = 0.025;
     curvaActual = 0;
     parametroU = 0;
     angulo = 0;
